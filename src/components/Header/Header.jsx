@@ -54,7 +54,7 @@ const Header = () => {
         {/* PARALLAX REFRAC ENGINE: Fresnel Grid & Noise */}
         <motion.div
           style={{ x: gridX, y: gridY }}
-          className="absolute inset-[-40px] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.08] mix-blend-overlay pointer-events-none"
+          className="absolute inset-[-40px] bg-[url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E')] opacity-[0.08] mix-blend-overlay pointer-events-none"
         />
         <motion.div
           style={{ x: useTransform(mouseX, [0, 1], [15, -15]), y: useTransform(mouseY, [0, 1], [8, -8]) }}

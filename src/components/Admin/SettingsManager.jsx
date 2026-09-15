@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../../firebase';
 import { doc, onSnapshot, setDoc } from 'firebase/firestore';
-import { FaGlobe, FaLinkedin, FaGithub, FaTwitter, FaInstagram, FaEnvelope, FaMapMarkerAlt, FaSave, FaTools, FaShareAlt } from 'react-icons/fa';
+import { FaGlobe, FaLinkedin, FaGithub, FaTwitter, FaInstagram, FaEnvelope, FaMapMarkerAlt, FaSave, FaTools, FaShareAlt, FaFileUpload, FaTrash, FaFilePdf, FaSpinner } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const SettingsManager = () => {
@@ -18,11 +18,23 @@ const SettingsManager = () => {
         contactSubheading: 'Let\'s build something together.'
     });
 
+    const [resumeUrl, setResumeUrl] = useState('/resume.pdf');
+    const [uploadingResume, setUploadingResume] = useState(false);
+
     useEffect(() => {
         const unsub = onSnapshot(doc(db, 'content', 'settings'), (docSnap) => {
             if (docSnap.exists()) setSettings(docSnap.data());
         });
-        return () => unsub();
+        
+        const unsubResume = onSnapshot(doc(db, 'settings', 'resume'), (docSnap) => {
+            if (docSnap.exists() && docSnap.data().url) {
+                setResumeUrl(docSnap.data().url);
+            } else {
+                setResumeUrl('/resume.pdf');
+            }
+        });
+
+        return () => { unsub(); unsubResume(); };
     }, []);
 
     const handleSubmit = async (e) => {
@@ -38,6 +50,67 @@ const SettingsManager = () => {
         }
     };
 
+    const handleResumeUpload = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+        const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
+
+        if (!cloudName || !uploadPreset) {
+            alert("Cloudinary configuration missing in .env");
+            return;
+        }
+
+        setUploadingResume(true);
+
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', uploadPreset);
+        formData.append('folder', 'portfolio');
+
+        try {
+            const response = await fetch(
+                `https://api.cloudinary.com/v1_1/${cloudName}/raw/upload`,
+                { method: 'POST', body: formData }
+            );
+
+            const data = await response.json();
+
+            if (data.secure_url) {
+                await setDoc(doc(db, 'settings', 'resume'), {
+                    url: data.secure_url,
+                    updatedAt: new Date().toISOString()
+                });
+                alert("Resume uploaded successfully!");
+            } else {
+                alert(data.error?.message || "Upload failed");
+            }
+        } catch (err) {
+            alert("Connection error: " + err.message);
+        } finally {
+            setUploadingResume(false);
+        }
+    };
+
+    const handleResumeDelete = async () => {
+        if (!window.confirm("Are you sure you want to delete the current resume?")) return;
+        
+        try {
+            setUploadingResume(true);
+            await setDoc(doc(db, 'settings', 'resume'), {
+                url: '',
+                updatedAt: new Date().toISOString()
+            });
+            setResumeUrl('/resume.pdf');
+            alert("Resume reset to default successfully!");
+        } catch (error) {
+            alert("Error deleting resume");
+        } finally {
+            setUploadingResume(false);
+        }
+    };
+
     return (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-8 pb-20">
             <div className="flex flex-col md:flex-row justify-between md:items-center border-b border-white/5 pb-6 gap-4">
@@ -46,7 +119,7 @@ const SettingsManager = () => {
                         Global Protocol
                         <span className="text-[10px] bg-orange-500/10 text-orange-400 px-2 py-1 rounded border border-orange-500/20 font-bold">v1.5</span>
                     </h2>
-                    <p className="text-zinc-500 text-xs uppercase tracking-widest mt-1 font-bold">Manage Social Links & Global Metadata</p>
+                    <p className="text-zinc-500 text-xs uppercase tracking-widest mt-1 font-bold">Manage Social Links, Resume & Global Metadata</p>
                 </div>
             </div>
 
@@ -169,7 +242,48 @@ const SettingsManager = () => {
                         </div>
                     </div>
 
-                    <div className="flex justify-end pt-4">
+                    {/* Resume Management */}
+                    <div className="space-y-6 pt-6 border-t border-white/5">
+                        <h3 className="text-sm font-bold text-white uppercase tracking-widest flex items-center gap-2 border-l-2 border-orange-500 pl-3">
+                            <FaFilePdf className="text-orange-400" /> Resume Document
+                        </h3>
+                        
+                        <div className="bg-black/40 border border-white/10 rounded-xl p-6 flex flex-col md:flex-row items-center gap-6 justify-between">
+                            <div className="flex-1 space-y-2 text-center md:text-left">
+                                <h4 className="text-sm font-bold text-white">Current Active Resume</h4>
+                                <p className="text-[10px] text-zinc-400 uppercase tracking-widest truncate max-w-xs md:max-w-md" title={resumeUrl}>
+                                    {resumeUrl === '/resume.pdf' ? 'Local Default (resume.pdf)' : 'Cloud Document (Active)'}
+                                </p>
+                            </div>
+                            
+                            <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+                                <label className={`flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-widest transition-all cursor-pointer ${uploadingResume ? 'bg-zinc-800 text-zinc-500 pointer-events-none' : 'bg-white text-black hover:bg-zinc-200'}`}>
+                                    {uploadingResume ? <FaSpinner className="animate-spin" /> : <FaFileUpload />}
+                                    {uploadingResume ? 'Uploading...' : 'Upload PDF'}
+                                    <input 
+                                        type="file" 
+                                        className="hidden" 
+                                        accept="application/pdf"
+                                        onChange={handleResumeUpload}
+                                        disabled={uploadingResume}
+                                    />
+                                </label>
+                                
+                                {resumeUrl !== '/resume.pdf' && (
+                                    <button 
+                                        type="button"
+                                        onClick={handleResumeDelete}
+                                        disabled={uploadingResume}
+                                        className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-red-500/10 text-red-500 border border-red-500/20 hover:bg-red-500 hover:text-white transition-all text-xs font-bold uppercase tracking-widest"
+                                    >
+                                        <FaTrash /> Reset
+                                    </button>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="flex justify-end pt-4 border-t border-white/5">
                         <button
                             type="submit"
                             disabled={loading}

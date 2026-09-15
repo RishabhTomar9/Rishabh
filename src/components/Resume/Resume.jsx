@@ -1,12 +1,43 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
-import { Maximize2, Printer, Download, ExternalLink, FileText } from 'lucide-react';
+import { Maximize2, Printer, Download, ExternalLink, FileText, CloudUpload, Trash2, Loader2, AlertCircle } from 'lucide-react';
 import Button from '../Buttons/Buttons';
+import { auth, db } from '../../firebase';
+import { onAuthStateChanged } from 'firebase/auth';
+import { doc, onSnapshot, setDoc } from 'firebase/firestore';
 
 const Resume = () => {
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
     const containerRef = useRef(null);
+
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [resumeUrl, setResumeUrl] = useState('/resume.pdf');
+    const [uploading, setUploading] = useState(false);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
+            if (user && user.email === 'rishabhtomar9999@gmail.com') {
+                setIsAdmin(true);
+            } else {
+                setIsAdmin(false);
+            }
+        });
+
+        const unsubscribeDb = onSnapshot(doc(db, 'settings', 'resume'), (docSnap) => {
+            if (docSnap.exists() && docSnap.data().url) {
+                setResumeUrl(docSnap.data().url);
+            } else {
+                setResumeUrl('/resume.pdf');
+            }
+        });
+
+        return () => {
+            unsubscribeAuth();
+            unsubscribeDb();
+        };
+    }, []);
 
     const handleMouseMove = ({ currentTarget, clientX, clientY }) => {
         const { left, top } = currentTarget.getBoundingClientRect();
@@ -17,14 +48,85 @@ const Resume = () => {
     const handlePrint = () => {
         const iframe = document.createElement('iframe');
         iframe.style.display = 'none';
-        iframe.src = "/resume.pdf";
+        iframe.src = resumeUrl;
         document.body.appendChild(iframe);
-        iframe.contentWindow.focus();
-        iframe.contentWindow.print();
+        
+        iframe.onload = () => {
+            try {
+                iframe.contentWindow.focus();
+                iframe.contentWindow.print();
+            } catch (e) {
+                console.error("Print blocked due to cross-origin policies. Opening in new tab instead.");
+                window.open(resumeUrl, '_blank');
+            }
+        };
     };
 
     const toggleFullScreen = () => {
-        window.open('/resume.pdf', '_blank');
+        window.open(resumeUrl, '_blank');
+    };
+
+    const handleUpload = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+        const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
+
+        if (!cloudName || !uploadPreset) {
+            setError("Cloudinary configuration missing in .env");
+            return;
+        }
+
+        setUploading(true);
+        setError(null);
+
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', uploadPreset);
+        formData.append('folder', 'portfolio');
+
+        try {
+            const response = await fetch(
+                `https://api.cloudinary.com/v1_1/${cloudName}/raw/upload`,
+                {
+                    method: 'POST',
+                    body: formData,
+                }
+            );
+
+            const data = await response.json();
+
+            if (data.secure_url) {
+                await setDoc(doc(db, 'settings', 'resume'), {
+                    url: data.secure_url,
+                    updatedAt: new Date().toISOString()
+                });
+            } else {
+                setError(data.error?.message || "Upload failed");
+            }
+        } catch (err) {
+            setError("Connection error: " + err.message);
+        } finally {
+            setUploading(false);
+        }
+    };
+
+    const handleDelete = async () => {
+        if (!window.confirm("Are you sure you want to delete the current resume?")) return;
+        
+        try {
+            setUploading(true);
+            await setDoc(doc(db, 'settings', 'resume'), {
+                url: '',
+                updatedAt: new Date().toISOString()
+            });
+            setResumeUrl('/resume.pdf');
+        } catch (error) {
+            setError("Error deleting resume");
+        } finally {
+            setUploading(false);
+        }
     };
 
     return (
@@ -53,7 +155,7 @@ const Resume = () => {
                     </motion.div>
 
                     <div className="text-zinc-500 font-bold text-[10px] uppercase tracking-widest hidden md:block text-right">
-                        Last Updated: Feb 2026 <br />
+                        Last Updated: {new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' })} <br />
                         Status: Verified
                     </div>
                 </div>
@@ -80,7 +182,7 @@ const Resume = () => {
                                         <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/20 border border-yellow-500/50" />
                                         <div className="w-2.5 h-2.5 rounded-full bg-green-500/20 border border-green-500/50" />
                                     </div>
-                                    <span className="text-[10px] font-bold text-zinc-400 tracking-wider hidden sm:inline-block">RESUME_V2024.PDF</span>
+                                    <span className="text-[10px] font-bold text-zinc-400 tracking-wider hidden sm:inline-block">RESUME_ACTIVE.PDF</span>
                                 </div>
                                 <div className="flex items-center gap-1">
                                     <button onClick={handlePrint} className="p-2 hover:bg-white/10 rounded-lg transition-colors text-zinc-400 hover:text-white" title="Print Document">
@@ -116,15 +218,15 @@ const Resume = () => {
                             {/* Grid Overlay for Texture */}
                             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:100px_100px] pointer-events-none z-10" />
 
-                            {/* Resume Image Preview */}
+                            {/* Resume Live Preview */}
                             <div
                                 className="w-full h-full bg-zinc-900 cursor-pointer relative overflow-hidden"
-                                onClick={() => window.open('/resume.pdf', '_blank')}
+                                onClick={() => window.open(resumeUrl, '_blank')}
                             >
-                                <img
-                                    src="/resume.png"
-                                    alt="Resume Preview"
-                                    className="w-full h-full object-contain opacity-80 transition-opacity duration-300"
+                                <iframe
+                                    src={`${resumeUrl}#toolbar=0&navpanes=0&scrollbar=0`}
+                                    title="Resume Preview"
+                                    className="w-full h-full object-cover opacity-80 transition-opacity duration-300 pointer-events-none border-none"
                                 />
 
                                 {/* Watermark Overlay */}
@@ -163,8 +265,9 @@ const Resume = () => {
                             {/* Main Actions */}
                             <div className="space-y-4 mb-8">
                                 <Button
-                                    href="/resume.pdf"
+                                    href={resumeUrl}
                                     download="Resume_RishabhTomar.pdf"
+                                    target="_blank"
                                     variant="primary"
                                     className="!w-full !justify-center !py-4 shadow-lg shadow-purple-900/20"
                                 >
@@ -174,7 +277,7 @@ const Resume = () => {
                                     </span>
                                 </Button>
                                 <Button
-                                    href="/resume.pdf"
+                                    href={resumeUrl}
                                     target="_blank"
                                     variant="ghost"
                                     className="!w-full !justify-center !py-4 !bg-white/5 hover:!bg-white/10"
@@ -185,6 +288,8 @@ const Resume = () => {
                                     </span>
                                 </Button>
                             </div>
+
+                            
 
                             {/* Enhanced Metadata Grid */}
                             <div className="mt-auto bg-black/20 rounded-xl p-4 border border-white/5">
@@ -202,8 +307,10 @@ const Resume = () => {
                                         <span className="text-zinc-300 bg-white/5 px-2 py-0.5 rounded">PDF/A-1b</span>
                                     </div>
                                     <div className="flex justify-between items-center">
-                                        <span className="text-zinc-600">SIZE</span>
-                                        <span className="text-zinc-300">2.4 MB</span>
+                                        <span className="text-zinc-600">SOURCE</span>
+                                        <span className="text-zinc-300 truncate max-w-[100px] text-right" title={resumeUrl}>
+                                            {resumeUrl === '/resume.pdf' ? 'Local Asset' : 'Cloud Storage'}
+                                        </span>
                                     </div>
                                     <div className="flex justify-between items-center">
                                         <span className="text-zinc-600">ENCRYPTION</span>
