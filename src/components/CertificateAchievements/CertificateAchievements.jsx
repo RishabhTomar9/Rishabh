@@ -82,7 +82,7 @@ const CertificateAchievements = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/80 to-transparent opacity-90 md:opacity-60 md:group-hover:opacity-80 transition-opacity duration-300" />
 
               {/* Top Right Link Icon - Always visible on Mobile */}
-              <div className="absolute top-4 right-4 bg-white/10 backdrop-blur-md p-2.5 rounded-full border border-white/20 opacity-100 translate-y-0 md:opacity-0 md:translate-y-4 md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-300 z-20">
+              <div className="absolute top-4 right-4 bg-white/10 backdrop-blur-md p-2.5 rounded-xl border border-white/20 opacity-100 translate-y-0 md:opacity-0 md:translate-y-4 md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-300 z-20">
                 <FaExternalLinkAlt className="text-white text-xs" />
               </div>
 
@@ -135,7 +135,7 @@ const CertificateAchievements = () => {
                 transition={{ delay: index * 0.1, type: "spring" }}
               >
                 {/* Pedestal/Background */}
-                <div className="absolute inset-0 bg-transparent group-hover:bg-purple-500/5 rounded-full blur-xl transition-colors duration-500 hidden md:block" />
+                <div className="absolute inset-0 bg-transparent group-hover:bg-purple-500/5 rounded-xl blur-xl transition-colors duration-500 hidden md:block" />
 
                 <div className="w-20 h-20 md:w-24 md:h-24 relative z-10 flex items-center justify-center transition-all duration-500 drop-shadow-2xl">
                   <img src={badge.image} alt={badge.title} className="w-full h-full object-contain filter drop-shadow-lg" />
@@ -150,7 +150,7 @@ const CertificateAchievements = () => {
 
                 {/* Enhanced Tooltip (Desktop Only) */}
                 <div className="hidden md:block absolute -bottom-12 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-20 pointer-events-none">
-                  <div className="bg-zinc-900/90 border border-purple-500/20 px-3 py-2 rounded-lg backdrop-blur-md shadow-2xl flex flex-col items-center">
+                  <div className="bg-zinc-900/90 border border-purple-500/20 px-3 py-2 rounded-xl backdrop-blur-md shadow-2xl flex flex-col items-center">
                     <div className="w-2 h-2 bg-zinc-900 border-t border-l border-purple-500/20 absolute -top-1 left-1/2 -translate-x-1/2 rotate-45" />
                     <p className="text-[9px] font-bold text-zinc-200 uppercase tracking-wider whitespace-nowrap">
                       {badge.title}
@@ -192,12 +192,12 @@ const CertificateAchievements = () => {
                 <div className="relative h-full bg-zinc-950/80 rounded-[20px] p-6 md:p-8 flex flex-col sm:flex-row justify-between items-center gap-6 overflow-hidden">
 
                   {/* Background Glows */}
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-                  <div className="absolute bottom-0 left-0 w-32 h-32 bg-purple-500/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 pointer-events-none" />
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/10 rounded-xl blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+                  <div className="absolute bottom-0 left-0 w-32 h-32 bg-purple-500/5 rounded-xl blur-3xl translate-y-1/2 -translate-x-1/2 pointer-events-none" />
 
                   <div className="relative z-10 flex-1 text-center sm:text-left">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/5 border border-orange-500/10 mb-4">
-                      <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-orange-500/5 border border-orange-500/10 mb-4">
+                      <span className="w-1.5 h-1.5 rounded-xl bg-orange-500 animate-pulse" />
                       <span className="text-[10px] font-bold text-orange-400 uppercase tracking-widest">{ach.date}</span>
                     </div>
 

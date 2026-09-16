@@ -52,10 +52,10 @@ const AboutCard = ({ card, index }) => {
               {renderIcon(card.icon)}
             </div>
             <div
-              className="flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-zinc-950 border border-white/5 shadow-inner"
+              className="flex items-center gap-2.5 px-4 py-1.5 rounded-xl bg-zinc-950 border border-white/5 shadow-inner"
             >
               <div
-                className="w-1.5 h-1.5 rounded-full animate-pulse shadow-lg"
+                className="w-1.5 h-1.5 rounded-xl animate-pulse shadow-lg"
                 style={{ backgroundColor: card.color, boxShadow: `0 0 10px ${card.color}` }}
               />
               <span className="text-[10px] font-black text-zinc-500 tracking-[0.2em] uppercase">{card.tag}</span>
@@ -147,8 +147,8 @@ const About = () => {
             </motion.div>
 
             <div className="lg:text-right space-y-2">
-              <div className="inline-flex items-center gap-3 bg-zinc-950 px-5 py-2.5 rounded-full border border-white/5 shadow-2xl">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_10px_#10b981]" />
+              <div className="inline-flex items-center gap-3 bg-zinc-950 px-5 py-2.5 rounded-xl border border-white/5 shadow-2xl">
+                <span className="w-2 h-2 rounded-xl bg-emerald-500 animate-pulse shadow-[0_0_10px_#10b981]" />
                 <span className="text-[10px] font-black text-white uppercase tracking-widest leading-none mt-0.5">Live Status: {aboutData.status}</span>
               </div>
               <div className="text-zinc-600 font-bold text-[10px] uppercase tracking-[0.4em] leading-loose pr-4">

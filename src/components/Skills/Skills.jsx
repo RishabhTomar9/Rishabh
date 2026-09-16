@@ -68,7 +68,7 @@ const SkillCard = ({ skill, index, isInView }) => {
 
       <div className="flex items-start gap-4 mb-6">
         <div
-          className="text-2xl md:text-3xl w-12 h-12 md:w-14 md:h-14 rounded-lg bg-zinc-950 flex items-center justify-center border border-white/5 group-hover:border-white/20 transition-all shadow-inner shrink-0"
+          className="text-2xl md:text-3xl w-12 h-12 md:w-14 md:h-14 rounded-xl bg-zinc-950 flex items-center justify-center border border-white/5 group-hover:border-white/20 transition-all shadow-inner shrink-0"
           style={{ color: skill.color?.replace('0.3', '1') || '#fff' }}
         >
           {renderDynamicIcon(skill.iconName || skill.name, { size: 28 })}
@@ -80,9 +80,9 @@ const SkillCard = ({ skill, index, isInView }) => {
       </div>
 
       <div className="space-y-4">
-        <div className="h-1.5 w-full bg-zinc-950 rounded-full overflow-hidden border border-white/5">
+        <div className="h-1.5 w-full bg-zinc-950 rounded-xl overflow-hidden border border-white/5">
           <motion.div
-            className="h-full rounded-full relative"
+            className="h-full rounded-xl relative"
             style={{
               background: `linear-gradient(to right, ${skill.color?.replace('0.3', '0.5') || '#444'}, ${skill.color?.replace('0.3', '1') || '#fff'})`
             }}

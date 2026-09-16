@@ -45,7 +45,7 @@ const SocialCard = ({ platform, handle }) => {
             <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-gradient-to-br ${accentColor} opacity-0 group-hover:opacity-20 blur-[100px] transition-opacity duration-700`} />
 
             {/* Icon */}
-            <div className={`relative z-10 mb-6 p-6 rounded-full bg-zinc-950 border border-white/10 group-hover:scale-110 transition-transform duration-500 ${iconColor}`}>
+            <div className={`relative z-10 mb-6 p-6 rounded-xl bg-zinc-950 border border-white/10 group-hover:scale-110 transition-transform duration-500 ${iconColor}`}>
                 {platform === 'Instagram' ? <FaInstagram className="w-12 h-12" /> : <FaYoutube className="w-12 h-12" />}
             </div>
 

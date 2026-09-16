@@ -73,7 +73,7 @@ const ProjectCard = ({ project }) => {
         <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/80 via-transparent to-transparent opacity-60" />
 
         {/* Mobile/Quick Action Overlay - Subtle hint */}
-        <div className="absolute top-4 right-4 bg-purple-500/90 backdrop-blur-md border border-white/10 rounded-full px-3 py-1 text-[10px] font-bold text-white uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-2 shadow-lg">
+        <div className="absolute top-4 right-4 bg-purple-500/90 backdrop-blur-md border border-white/10 rounded-xl px-3 py-1 text-[10px] font-bold text-white uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-2 shadow-lg">
           View Details <FaArrowRight />
         </div>
       </Link>
@@ -93,7 +93,7 @@ const ProjectCard = ({ project }) => {
               href={project.link}
               target="_blank"
               rel="noreferrer"
-              className="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 border border-white/5 hover:border-purple-500/30 flex items-center justify-center text-zinc-400 hover:text-white transition-all hover:scale-110 active:scale-95"
+              className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-purple-500/30 flex items-center justify-center text-zinc-400 hover:text-white transition-all hover:scale-110 active:scale-95"
               title="Live Demo"
             >
               <FaExternalLinkAlt className="text-sm" />
@@ -102,7 +102,7 @@ const ProjectCard = ({ project }) => {
               href="https://github.com/RishabhTomar9" // Using generic logic as specific repo wasn't in DB usually
               target="_blank"
               rel="noreferrer"
-              className="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 border border-white/5 hover:border-purple-500/30 flex items-center justify-center text-zinc-400 hover:text-white transition-all hover:scale-110 active:scale-95"
+              className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-purple-500/30 flex items-center justify-center text-zinc-400 hover:text-white transition-all hover:scale-110 active:scale-95"
               title="Source Code"
             >
               <FaGithub className="text-lg" />
@@ -117,12 +117,12 @@ const ProjectCard = ({ project }) => {
         <div className="mt-auto pt-6 border-t border-white/5">
           <div className="flex flex-wrap gap-2">
             {project.technologies.slice(0, 5).map((tech, i) => (
-              <span key={i} className="text-[10px] font-bold px-3 py-1.5 rounded-lg bg-purple-500/5 border border-purple-500/10 text-purple-300/80 group-hover:border-purple-500/20 group-hover:bg-purple-500/10 transition-all uppercase tracking-wider">
+              <span key={i} className="text-[10px] font-bold px-3 py-1.5 rounded-xl bg-purple-500/5 border border-purple-500/10 text-purple-300/80 group-hover:border-purple-500/20 group-hover:bg-purple-500/10 transition-all uppercase tracking-wider">
                 {tech}
               </span>
             ))}
             {project.technologies.length > 5 && (
-              <span className="text-[10px] font-bold px-3 py-1.5 rounded-lg bg-white/5 border border-white/5 text-zinc-500 uppercase tracking-wider">
+              <span className="text-[10px] font-bold px-3 py-1.5 rounded-xl bg-white/5 border border-white/5 text-zinc-500 uppercase tracking-wider">
                 +{project.technologies.length - 5}
               </span>
             )}
@@ -195,7 +195,7 @@ const Projects = () => {
         {loading ? (
           <div className="min-h-[400px] flex justify-center items-center">
             <div className="relative">
-              <div className="w-16 h-16 border-4 border-purple-500/30 border-t-purple-500 rounded-full animate-spin" />
+              <div className="w-16 h-16 border-4 border-purple-500/30 border-t-purple-500 rounded-xl animate-spin" />
               <div className="absolute inset-0 flex items-center justify-center font-bold text-[10px] font-bold text-purple-500 animate-pulse">LOAD</div>
             </div>
           </div>

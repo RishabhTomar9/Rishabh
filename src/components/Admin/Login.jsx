@@ -38,7 +38,7 @@ const Login = () => {
                 className="bg-zinc-900/50 backdrop-blur-xl border border-white/5 p-8 rounded-xl w-full max-w-md relative z-10 shadow-2xl"
             >
                 <div className="text-center mb-8">
-                    <div className="w-16 h-16 bg-purple-500/10 rounded-full flex items-center justify-center mx-auto mb-4 border border-purple-500/20">
+                    <div className="w-16 h-16 bg-purple-500/10 rounded-xl flex items-center justify-center mx-auto mb-4 border border-purple-500/20">
                         <FaLock className="text-2xl text-purple-500" />
                     </div>
                     <h1 className="text-2xl font-bold text-white mb-2 tracking-tight">Admin Portal</h1>
@@ -46,7 +46,7 @@ const Login = () => {
                 </div>
 
                 {error && (
-                    <div className="bg-red-500/10 border border-red-500/50 text-red-500 p-3 rounded-lg text-sm mb-6 text-center">
+                    <div className="bg-red-500/10 border border-red-500/50 text-red-500 p-3 rounded-xl text-sm mb-6 text-center">
                         {error}
                     </div>
                 )}

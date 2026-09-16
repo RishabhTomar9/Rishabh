@@ -50,7 +50,7 @@ const Resume = () => {
         iframe.style.display = 'none';
         iframe.src = resumeUrl;
         document.body.appendChild(iframe);
-        
+
         iframe.onload = () => {
             try {
                 iframe.contentWindow.focus();
@@ -114,7 +114,7 @@ const Resume = () => {
 
     const handleDelete = async () => {
         if (!window.confirm("Are you sure you want to delete the current resume?")) return;
-        
+
         try {
             setUploading(true);
             await setDoc(doc(db, 'settings', 'resume'), {
@@ -178,17 +178,17 @@ const Resume = () => {
                             <div className="absolute top-4 left-4 right-4 z-40 flex items-center justify-between bg-zinc-900/90 border border-white/10 rounded-xl p-2 px-4 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                 <div className="flex items-center gap-3">
                                     <div className="flex gap-1.5 container-dots">
-                                        <div className="w-2.5 h-2.5 rounded-full bg-red-500/20 border border-red-500/50" />
-                                        <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/20 border border-yellow-500/50" />
-                                        <div className="w-2.5 h-2.5 rounded-full bg-green-500/20 border border-green-500/50" />
+                                        <div className="w-2.5 h-2.5 rounded-xl bg-red-500/20 border border-red-500/50" />
+                                        <div className="w-2.5 h-2.5 rounded-xl bg-yellow-500/20 border border-yellow-500/50" />
+                                        <div className="w-2.5 h-2.5 rounded-xl bg-green-500/20 border border-green-500/50" />
                                     </div>
                                     <span className="text-[10px] font-bold text-zinc-400 tracking-wider hidden sm:inline-block">RESUME_ACTIVE.PDF</span>
                                 </div>
                                 <div className="flex items-center gap-1">
-                                    <button onClick={handlePrint} className="p-2 hover:bg-white/10 rounded-lg transition-colors text-zinc-400 hover:text-white" title="Print Document">
+                                    <button onClick={handlePrint} className="p-2 hover:bg-white/10 rounded-xl transition-colors text-zinc-400 hover:text-white" title="Print Document">
                                         <Printer className="w-3.5 h-3.5" />
                                     </button>
-                                    <button onClick={toggleFullScreen} className="p-2 hover:bg-white/10 rounded-lg transition-colors text-zinc-400 hover:text-white" title="Open PDF">
+                                    <button onClick={toggleFullScreen} className="p-2 hover:bg-white/10 rounded-xl transition-colors text-zinc-400 hover:text-white" title="Open PDF">
                                         <Maximize2 className="w-3.5 h-3.5" />
                                     </button>
                                 </div>
@@ -254,7 +254,7 @@ const Resume = () => {
                         >
                             {/* Tech Corner Accent */}
                             <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-purple-500/10 to-transparent -z-10 rounded-tr-2xl" />
-                            <div className="absolute top-6 right-6 w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
+                            <div className="absolute top-6 right-6 w-2 h-2 rounded-xl bg-emerald-500 animate-pulse shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
 
                             {/* Header */}
                             <h3 className="text-xs font-bold text-zinc-400 mb-8 uppercase tracking-[0.2em] flex items-center gap-3 border-b border-white/5 pb-4">
@@ -289,16 +289,16 @@ const Resume = () => {
                                 </Button>
                             </div>
 
-                            
+
 
                             {/* Enhanced Metadata Grid */}
                             <div className="mt-auto bg-black/20 rounded-xl p-4 border border-white/5">
                                 <div className="flex items-center justify-between mb-4 border-b border-white/5 pb-2">
                                     <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Metadata</span>
                                     <div className="flex gap-1">
-                                        <div className="w-1 h-1 rounded-full bg-zinc-700" />
-                                        <div className="w-1 h-1 rounded-full bg-zinc-700" />
-                                        <div className="w-1 h-1 rounded-full bg-zinc-700" />
+                                        <div className="w-1 h-1 rounded-xl bg-zinc-700" />
+                                        <div className="w-1 h-1 rounded-xl bg-zinc-700" />
+                                        <div className="w-1 h-1 rounded-xl bg-zinc-700" />
                                     </div>
                                 </div>
                                 <div className="space-y-3 font-bold text-[10px]">

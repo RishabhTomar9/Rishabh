@@ -104,7 +104,7 @@ const CertificateManager = () => {
                     <button
                         key={tab.id}
                         onClick={() => { setActiveTab(tab.id); setIsEditing(false); setCurrentItem({ title: '', date: '', image: '', link: '' }); }}
-                        className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all ${activeTab === tab.id ? 'bg-orange-600 text-white shadow-lg shadow-orange-900/20' : 'text-zinc-500 hover:text-white hover:bg-white/5'}`}
+                        className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all ${activeTab === tab.id ? 'bg-orange-600 text-white shadow-lg shadow-orange-900/20' : 'text-zinc-500 hover:text-white hover:bg-white/5'}`}
                     >
                         {tab.icon} {tab.label}
                     </button>
@@ -201,7 +201,7 @@ const CertificateManager = () => {
                 {/* List */}
                 <div className="lg:col-span-7 space-y-4">
                     <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse" />
+                        <span className="w-2 h-2 rounded-xl bg-orange-500 animate-pulse" />
                         Stored Assets ({items.length})
                     </h3>
 
@@ -229,7 +229,7 @@ const CertificateManager = () => {
                                         <div className="lg:hidden absolute top-2 right-2 z-20">
                                             <button
                                                 onClick={() => setActiveActionMenu(activeActionMenu === item.id ? null : item.id)}
-                                                className="p-1.5 bg-black/60 backdrop-blur-md border border-white/10 rounded-lg text-white"
+                                                className="p-1.5 bg-black/60 backdrop-blur-md border border-white/10 rounded-xl text-white"
                                             >
                                                 <MoreVertical className="w-3.5 h-3.5" />
                                             </button>
@@ -286,8 +286,8 @@ const CertificateManager = () => {
                             <h3 className="text-xl font-bold text-white mb-2">Confirm Delete?</h3>
                             <p className="text-zinc-400 text-sm mb-6">Permanently remove <span className="text-white font-bold">{itemToDelete?.title}</span>?</p>
                             <div className="flex justify-end gap-3">
-                                <button onClick={() => setIsDeleteModalOpen(false)} className="px-4 py-2 rounded-lg text-zinc-400 hover:text-white transition-colors text-sm font-bold">Cancel</button>
-                                <button onClick={confirmDelete} className="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-500 transition-colors text-sm font-bold">Delete</button>
+                                <button onClick={() => setIsDeleteModalOpen(false)} className="px-4 py-2 rounded-xl text-zinc-400 hover:text-white transition-colors text-sm font-bold">Cancel</button>
+                                <button onClick={confirmDelete} className="px-4 py-2 rounded-xl bg-red-600 text-white hover:bg-red-500 transition-colors text-sm font-bold">Delete</button>
                             </div>
                         </motion.div>
                     </div>

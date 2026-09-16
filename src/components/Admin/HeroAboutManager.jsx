@@ -108,13 +108,13 @@ const HeroAboutManager = () => {
                 <div className="flex bg-zinc-900/50 p-1 rounded-xl border border-white/10 w-full sm:w-fit shadow-lg shadow-black/40">
                     <button
                         onClick={() => setActiveTab('hero')}
-                        className={`flex-1 sm:flex-none px-6 py-2.5 rounded-lg text-[10px] font-black uppercase tracking-wider transition-all duration-300 ${activeTab === 'hero' ? 'bg-blue-600 text-white shadow-[0_0_20px_rgba(37,99,235,0.4)]' : 'text-zinc-500 hover:text-white'}`}
+                        className={`flex-1 sm:flex-none px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-wider transition-all duration-300 ${activeTab === 'hero' ? 'bg-blue-600 text-white shadow-[0_0_20px_rgba(37,99,235,0.4)]' : 'text-zinc-500 hover:text-white'}`}
                     >
                         Hero
                     </button>
                     <button
                         onClick={() => setActiveTab('about')}
-                        className={`flex-1 sm:flex-none px-6 py-2.5 rounded-lg text-[10px] font-black uppercase tracking-wider transition-all duration-300 ${activeTab === 'about' ? 'bg-emerald-600 text-white shadow-[0_0_20px_rgba(5,150,105,0.4)]' : 'text-zinc-500 hover:text-white'}`}
+                        className={`flex-1 sm:flex-none px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-wider transition-all duration-300 ${activeTab === 'about' ? 'bg-emerald-600 text-white shadow-[0_0_20px_rgba(5,150,105,0.4)]' : 'text-zinc-500 hover:text-white'}`}
                     >
                         About
                     </button>
@@ -319,7 +319,7 @@ const HeroAboutManager = () => {
                                                     type="color"
                                                     value={aboutData[`card${num}Color`] || '#ffffff'}
                                                     onChange={(e) => setAboutData({ ...aboutData, [`card${num}Color`]: e.target.value })}
-                                                    className="w-8 h-8 rounded-full bg-transparent border-none cursor-pointer overflow-hidden shadow-lg translate-x-2"
+                                                    className="w-8 h-8 rounded-xl bg-transparent border-none cursor-pointer overflow-hidden shadow-lg translate-x-2"
                                                 />
                                             </div>
 
@@ -330,7 +330,7 @@ const HeroAboutManager = () => {
                                                         type="text"
                                                         value={aboutData[`card${num}Icon`]}
                                                         onChange={(e) => setAboutData({ ...aboutData, [`card${num}Icon`]: e.target.value })}
-                                                        className="w-full bg-black/40 border border-white/10 rounded-lg p-2.5 text-white focus:border-emerald-500 outline-none text-[10px] font-bold"
+                                                        className="w-full bg-black/40 border border-white/10 rounded-xl p-2.5 text-white focus:border-emerald-500 outline-none text-[10px] font-bold"
                                                         placeholder="Lucide Icon (e.g. Code)"
                                                     />
                                                 </div>
@@ -340,7 +340,7 @@ const HeroAboutManager = () => {
                                                         type="text"
                                                         value={aboutData[`card${num}Title`]}
                                                         onChange={(e) => setAboutData({ ...aboutData, [`card${num}Title`]: e.target.value })}
-                                                        className="w-full bg-black/40 border border-white/10 rounded-lg p-2.5 text-white focus:border-emerald-500 outline-none text-xs font-black uppercase tracking-tight"
+                                                        className="w-full bg-black/40 border border-white/10 rounded-xl p-2.5 text-white focus:border-emerald-500 outline-none text-xs font-black uppercase tracking-tight"
                                                     />
                                                 </div>
                                                 <div className="space-y-1.5">
@@ -349,7 +349,7 @@ const HeroAboutManager = () => {
                                                         type="text"
                                                         value={aboutData[`card${num}Tag`]}
                                                         onChange={(e) => setAboutData({ ...aboutData, [`card${num}Tag`]: e.target.value })}
-                                                        className="w-full bg-black/40 border border-white/10 rounded-lg p-2.5 text-white focus:border-emerald-500 outline-none text-[9px] font-black uppercase tracking-widest"
+                                                        className="w-full bg-black/40 border border-white/10 rounded-xl p-2.5 text-white focus:border-emerald-500 outline-none text-[9px] font-black uppercase tracking-widest"
                                                     />
                                                 </div>
                                                 <div className="space-y-1.5">
@@ -357,7 +357,7 @@ const HeroAboutManager = () => {
                                                     <textarea
                                                         value={aboutData[`card${num}Desc`]}
                                                         onChange={(e) => setAboutData({ ...aboutData, [`card${num}Desc`]: e.target.value })}
-                                                        className="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-white focus:border-emerald-500 outline-none h-24 resize-none text-[10px] leading-relaxed font-medium"
+                                                        className="w-full bg-black/40 border border-white/10 rounded-xl p-3 text-white focus:border-emerald-500 outline-none h-24 resize-none text-[10px] leading-relaxed font-medium"
                                                     />
                                                 </div>
                                             </div>

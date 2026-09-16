@@ -28,7 +28,7 @@ const Loader = ({ onFinish, isReady }) => {
           clearInterval(interval);
           // Small debounce/settle time after 100%
           const timer = setTimeout(() => {
-             onFinish();
+            onFinish();
           }, 800);
           return 100;
         }
@@ -37,7 +37,7 @@ const Loader = ({ onFinish, isReady }) => {
         if (Math.random() > 0.6) {
           const key = Math.random().toString(36).substring(7).toUpperCase();
           const messages = [
-            "SHADOW_BUFFER_FETCHED", "PROTOCOL_LAYER_INIT", 
+            "SHADOW_BUFFER_FETCHED", "PROTOCOL_LAYER_INIT",
             "KERNEL_SYNC_COMPLETE", "UI_THREAD_ESTABLISHED",
             "FIREBASE_SOCKET_ACTIVE", "DATA_STREAM_HANDSHAKE"
           ];
@@ -93,7 +93,7 @@ const Loader = ({ onFinish, isReady }) => {
         {/* Top Status Bar */}
         <div className="flex justify-between items-center text-[10px] uppercase tracking-[0.2em] mb-4 border-b border-white/5 pb-4">
           <span className="flex items-center gap-2">
-            <span className="w-2 h-2 bg-purple-500 rounded-full animate-pulse" />
+            <span className="w-2 h-2 bg-purple-500 rounded-xl animate-pulse" />
             System Boot
           </span>
           <span>v2.0.26</span>
@@ -115,7 +115,7 @@ const Loader = ({ onFinish, isReady }) => {
 
         {/* Complex Progress Bar */}
         <div className="flex flex-col gap-2">
-          <div className="w-full h-2 bg-zinc-900 rounded-full overflow-hidden border border-white/5 relative">
+          <div className="w-full h-2 bg-zinc-900 rounded-xl overflow-hidden border border-white/5 relative">
             {/* Primary Bar */}
             <motion.div
               className="h-full bg-white relative z-10"
@@ -142,7 +142,7 @@ const Loader = ({ onFinish, isReady }) => {
         </div>
 
         {/* Terminal Log Output */}
-        <div className="h-32 bg-black/40 border border-white/5 rounded-lg p-4 font-bold text-xs text-green-500/80 overflow-hidden flex flex-col justify-end shadow-inner">
+        <div className="h-32 bg-black/40 border border-white/5 rounded-xl p-4 font-bold text-xs text-green-500/80 overflow-hidden flex flex-col justify-end shadow-inner">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black pointer-events-none" />
           <div className="relative z-10 flex flex-col gap-1">
             {logs.map((log, i) => (

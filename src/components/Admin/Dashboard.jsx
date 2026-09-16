@@ -151,7 +151,7 @@ const Dashboard = () => {
     if (authLoading) {
         return (
             <div className="min-h-screen bg-black flex items-center justify-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500"></div>
+                <div className="animate-spin rounded-xl h-12 w-12 border-t-2 border-b-2 border-purple-500"></div>
             </div>
         );
     }
@@ -221,10 +221,10 @@ const Dashboard = () => {
 
                     <div className="flex items-center gap-2 md:gap-4">
                         <div className="hidden xs:flex items-center gap-1.5 p-1 rounded-xl bg-white/5 border border-white/5">
-                            <button onClick={handleReturnToSite} className="p-2.5 rounded-lg text-zinc-400 hover:text-white hover:bg-white/5 transition-all" title="Return to Site">
+                            <button onClick={handleReturnToSite} className="p-2.5 rounded-xl text-zinc-400 hover:text-white hover:bg-white/5 transition-all" title="Return to Site">
                                 <FaHome />
                             </button>
-                            <button onClick={handleLogout} className="p-2.5 rounded-lg text-red-500/60 hover:text-red-500 hover:bg-red-500/10 transition-all" title="End Session">
+                            <button onClick={handleLogout} className="p-2.5 rounded-xl text-red-500/60 hover:text-red-500 hover:bg-red-500/10 transition-all" title="End Session">
                                 <FaPowerOff />
                             </button>
                         </div>
@@ -325,7 +325,7 @@ const Dashboard = () => {
                 <header className="mb-10 flex flex-col sm:flex-row sm:items-end justify-between gap-8 border-b border-white/5 pb-10">
                     <motion.div key={activeTab} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
                         <div className="flex items-center gap-3 mb-4">
-                            <div className="w-2 h-2 rounded-full bg-purple-500 animate-ping" />
+                            <div className="w-2 h-2 rounded-xl bg-purple-500 animate-ping" />
                             <p className="text-zinc-600 font-black text-[9px] uppercase tracking-[0.5em]">Module // Active Terminal</p>
                         </div>
                         <h2 className="text-5xl md:text-7xl lg:text-8xl font-black text-white uppercase tracking-tighter leading-[0.8] font-tech italic">
@@ -365,19 +365,19 @@ const Dashboard = () => {
                                         </div>
                                         <div className="flex bg-black/60 p-1 rounded-xl border border-white/10">
                                             {['all', 'unread', 'read'].map((f) => (
-                                                <button key={f} onClick={() => setFilter(f)} className={`px-5 py-2.5 rounded-lg text-[9px] font-black uppercase tracking-widest transition-all ${filter === f ? 'bg-purple-600 text-white' : 'text-zinc-600 hover:text-zinc-400'}`}>{f}</button>
+                                                <button key={f} onClick={() => setFilter(f)} className={`px-5 py-2.5 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all ${filter === f ? 'bg-purple-600 text-white' : 'text-zinc-600 hover:text-zinc-400'}`}>{f}</button>
                                             ))}
                                         </div>
                                     </div>
 
                                     <div className="grid gap-4">
                                         {loadingMessages ? (
-                                            <div className="text-center py-20 bg-zinc-900/10 rounded-3xl border border-white/5">
-                                                <div className="w-12 h-12 border-4 border-purple-500/20 border-t-purple-500 rounded-full animate-spin mx-auto mb-4" />
+                                            <div className="text-center py-20 bg-zinc-900/10 rounded-xl border border-white/5">
+                                                <div className="w-12 h-12 border-4 border-purple-500/20 border-t-purple-500 rounded-xl animate-spin mx-auto mb-4" />
                                                 <p className="text-zinc-600 font-black uppercase tracking-[0.3em] text-[10px]">Decoding Bitstream...</p>
                                             </div>
                                         ) : filteredMessages.length === 0 ? (
-                                            <div className="text-center py-32 border border-dashed border-white/10 rounded-3xl bg-zinc-900/10">
+                                            <div className="text-center py-32 border border-dashed border-white/10 rounded-xl bg-zinc-900/10">
                                                 <FaEnvelope className="text-5xl text-zinc-800 mx-auto mb-6 opacity-20" />
                                                 <p className="text-zinc-600 font-black uppercase tracking-[0.4em] text-xs">No Transmission Records Found</p>
                                             </div>
@@ -386,7 +386,7 @@ const Dashboard = () => {
                                                 <div
                                                     key={msg.id}
                                                     onClick={() => setSelectedMessage(selectedMessage?.id === msg.id ? null : msg)}
-                                                    className={`group relative bg-zinc-900/30 border rounded-[2rem] p-5 md:p-8 cursor-pointer transition-all duration-500 overflow-hidden ${selectedMessage?.id === msg.id
+                                                    className={`group relative bg-zinc-900/30 border rounded-xl p-5 md:p-8 cursor-pointer transition-all duration-500 overflow-hidden ${selectedMessage?.id === msg.id
                                                         ? 'border-purple-500/50 bg-zinc-900/60 shadow-[0_0_50px_rgba(168,85,247,0.1)] ring-1 ring-purple-500/20'
                                                         : 'border-white/5 hover:border-white/10 hover:bg-zinc-900/40'
                                                         }`}
@@ -404,14 +404,14 @@ const Dashboard = () => {
                                                                     <h3 className={`text-lg md:text-xl font-black uppercase tracking-tight truncate ${!msg.read ? 'text-white' : 'text-zinc-500'}`}>
                                                                         {msg.name}
                                                                     </h3>
-                                                                    {!msg.read && <div className="w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_10px_#a855f7] animate-pulse" />}
+                                                                    {!msg.read && <div className="w-2 h-2 rounded-xl bg-purple-500 shadow-[0_0_10px_#a855f7] animate-pulse" />}
                                                                 </div>
                                                                 <p className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest truncate max-w-[200px] md:max-w-none">{msg.email}</p>
                                                             </div>
                                                         </div>
 
                                                         <div className="flex items-center justify-between md:justify-end gap-4 border-t md:border-t-0 border-white/5 pt-4 md:pt-0">
-                                                            <div className="text-[9px] font-black text-zinc-600 uppercase tracking-widest bg-black/40 px-5 py-2.5 rounded-full border border-white/5 flex items-center gap-2">
+                                                            <div className="text-[9px] font-black text-zinc-600 uppercase tracking-widest bg-black/40 px-5 py-2.5 rounded-xl border border-white/5 flex items-center gap-2">
                                                                 <FaClock className="text-zinc-700" /> {getRelativeTime(msg.timestamp)}
                                                             </div>
 
@@ -422,7 +422,7 @@ const Dashboard = () => {
                                                                     className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${msg.read ? 'text-zinc-700 hover:text-white bg-white/5' : 'text-purple-500 bg-purple-500/10 border border-purple-500/20'
                                                                         }`}
                                                                 >
-                                                                    {msg.read ? <div className="w-1.5 h-1.5 rounded-full border-2 border-current" /> : <div className="w-2 h-2 bg-purple-500 rounded-full shadow-[0_0_10px_#a855f7]" />}
+                                                                    {msg.read ? <div className="w-1.5 h-1.5 rounded-xl border-2 border-current" /> : <div className="w-2 h-2 bg-purple-500 rounded-xl shadow-[0_0_10px_#a855f7]" />}
                                                                 </button>
 
                                                                 {/* 3-Dot Style Menu for secondary actions */}
@@ -465,10 +465,10 @@ const Dashboard = () => {
             <AnimatePresence>
                 {isDeleteModalOpen && (
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-xl" onClick={cancelDelete}>
-                        <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-zinc-900 border-2 border-white/10 rounded-3xl p-10 max-w-sm w-full shadow-2xl relative overflow-hidden" onClick={e => e.stopPropagation()}>
+                        <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-zinc-900 border-2 border-white/10 rounded-xl p-10 max-w-sm w-full shadow-2xl relative overflow-hidden" onClick={e => e.stopPropagation()}>
                             <div className="absolute top-0 left-0 w-full h-1.5 bg-red-600" />
                             <div className="text-center space-y-6">
-                                <div className="w-20 h-20 bg-red-500/10 rounded-3xl flex items-center justify-center border border-red-500/20 mx-auto shadow-[0_0_50px_rgba(239,68,68,0.2)]"><FaTrash className="text-3xl text-red-500" /></div>
+                                <div className="w-20 h-20 bg-red-500/10 rounded-xl flex items-center justify-center border border-red-500/20 mx-auto shadow-[0_0_50px_rgba(239,68,68,0.2)]"><FaTrash className="text-3xl text-red-500" /></div>
                                 <div>
                                     <h3 className="text-2xl font-black text-white uppercase tracking-tighter mb-2 italic">Confirm Deletion</h3>
                                     <p className="text-zinc-500 text-sm font-bold leading-relaxed">Permanently purge transmission from <span className="text-white">{messageToDelete?.name}</span>?</p>

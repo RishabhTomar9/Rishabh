@@ -174,13 +174,13 @@ const SkillsManager = () => {
                 <div className="flex bg-zinc-900/50 p-1 rounded-xl border border-white/10 w-fit">
                     <button
                         onClick={() => { setActiveTab('technical'); setIsEditing(false); }}
-                        className={`px-4 py-2 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all ${activeTab === 'technical' ? 'bg-purple-600 text-white shadow-lg' : 'text-zinc-500 hover:text-white'}`}
+                        className={`px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider transition-all ${activeTab === 'technical' ? 'bg-purple-600 text-white shadow-lg' : 'text-zinc-500 hover:text-white'}`}
                     >
                         Technical
                     </button>
                     <button
                         onClick={() => { setActiveTab('soft'); setIsEditing(false); }}
-                        className={`px-4 py-2 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all ${activeTab === 'soft' ? 'bg-purple-600 text-white shadow-lg' : 'text-zinc-500 hover:text-white'}`}
+                        className={`px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider transition-all ${activeTab === 'soft' ? 'bg-purple-600 text-white shadow-lg' : 'text-zinc-500 hover:text-white'}`}
                     >
                         Soft Skills
                     </button>
@@ -219,7 +219,7 @@ const SkillsManager = () => {
                                             max="100"
                                             value={currentTechSkill.level}
                                             onChange={(e) => setCurrentTechSkill({ ...currentTechSkill, level: parseInt(e.target.value) })}
-                                            className="w-full h-2 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-purple-500"
+                                            className="w-full h-2 bg-zinc-800 rounded-xl appearance-none cursor-pointer accent-purple-500"
                                         />
                                     </div>
                                     <div className="space-y-2">
@@ -354,7 +354,7 @@ const SkillsManager = () => {
                 {/* List Section */}
                 <div className="lg:col-span-7 space-y-4">
                     <h3 className="text-sm font-bold text-white uppercase tracking-widest flex items-center gap-2">
-                        <span className={`w-2 h-2 rounded-full animate-pulse ${activeTab === 'technical' ? 'bg-purple-500' : 'bg-emerald-500'}`} />
+                        <span className={`w-2 h-2 rounded-xl animate-pulse ${activeTab === 'technical' ? 'bg-purple-500' : 'bg-emerald-500'}`} />
                         Active Manifest ({activeTab === 'technical' ? techSkills.length : softSkills.length} Units)
                     </h3>
 
@@ -373,7 +373,7 @@ const SkillsManager = () => {
                                         {activeTab === 'technical' ? (
                                             <>
                                                 <div
-                                                    className="w-10 h-10 rounded-lg bg-black flex items-center justify-center text-xl border border-white/5"
+                                                    className="w-10 h-10 rounded-xl bg-black flex items-center justify-center text-xl border border-white/5"
                                                     style={{ color: skill.color?.replace('0.3', '1') }}
                                                 >
                                                     {renderDynamicIcon(skill.iconName, { size: 24 })}
@@ -381,7 +381,7 @@ const SkillsManager = () => {
                                                 <div>
                                                     <h4 className="font-bold text-white text-sm">{skill.name}</h4>
                                                     <div className="flex items-center gap-2 mt-1">
-                                                        <div className="w-20 h-1 bg-black rounded-full overflow-hidden">
+                                                        <div className="w-20 h-1 bg-black rounded-xl overflow-hidden">
                                                             <div className="h-full bg-purple-500" style={{ width: `${skill.level}%` }} />
                                                         </div>
                                                         <span className="text-[10px] text-zinc-500 font-bold">{skill.level}%</span>
@@ -390,7 +390,7 @@ const SkillsManager = () => {
                                             </>
                                         ) : (
                                             <>
-                                                <div className="w-10 h-10 rounded-lg bg-black flex items-center justify-center text-2xl border border-white/5">
+                                                <div className="w-10 h-10 rounded-xl bg-black flex items-center justify-center text-2xl border border-white/5">
                                                     {skill.emoji}
                                                 </div>
                                                 <h4 className="font-bold text-white text-sm">{skill.name}</h4>
@@ -403,13 +403,13 @@ const SkillsManager = () => {
                                         <div className="hidden lg:flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                             <button
                                                 onClick={() => handleEdit(skill, activeTab)}
-                                                className="p-2 hover:bg-white/10 rounded-lg text-blue-400 transition-colors"
+                                                className="p-2 hover:bg-white/10 rounded-xl text-blue-400 transition-colors"
                                             >
                                                 <FaEdit className="text-sm" />
                                             </button>
                                             <button
                                                 onClick={() => handleDeleteClick(skill, activeTab)}
-                                                className="p-2 hover:bg-red-500/10 rounded-lg text-red-400 transition-colors"
+                                                className="p-2 hover:bg-red-500/10 rounded-xl text-red-400 transition-colors"
                                             >
                                                 <FaTrash className="text-sm" />
                                             </button>
@@ -419,7 +419,7 @@ const SkillsManager = () => {
                                         <div className="lg:hidden relative">
                                             <button
                                                 onClick={() => setActiveActionMenu(activeActionMenu === skill.id ? null : skill.id)}
-                                                className="p-2 bg-white/5 border border-white/10 rounded-lg text-zinc-400"
+                                                className="p-2 bg-white/5 border border-white/10 rounded-xl text-zinc-400"
                                             >
                                                 {renderDynamicIcon('MoreVertical', { size: 16 })}
                                             </button>
@@ -472,8 +472,8 @@ const SkillsManager = () => {
                             <h3 className="text-xl font-bold text-white mb-2">Decommission Unit?</h3>
                             <p className="text-zinc-400 text-sm mb-6">Permanently remove <span className="text-white font-bold">{itemToDelete?.name}</span> from the capability matrix?</p>
                             <div className="flex justify-end gap-3">
-                                <button onClick={() => setIsDeleteModalOpen(false)} className="px-4 py-2 rounded-lg text-zinc-400 hover:text-white transition-colors text-sm font-bold uppercase tracking-widest">Abort</button>
-                                <button onClick={confirmDelete} className="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-500 transition-colors text-sm font-bold uppercase tracking-widest">Execute</button>
+                                <button onClick={() => setIsDeleteModalOpen(false)} className="px-4 py-2 rounded-xl text-zinc-400 hover:text-white transition-colors text-sm font-bold uppercase tracking-widest">Abort</button>
+                                <button onClick={confirmDelete} className="px-4 py-2 rounded-xl bg-red-600 text-white hover:bg-red-500 transition-colors text-sm font-bold uppercase tracking-widest">Execute</button>
                             </div>
                         </motion.div>
                     </div>

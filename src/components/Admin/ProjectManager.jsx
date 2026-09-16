@@ -177,7 +177,7 @@ const ProjectManager = () => {
                     <h2 className="text-3xl md:text-4xl font-black text-white tracking-tighter flex items-center gap-4">
                         <Box className="w-10 h-10 text-purple-500" />
                         PROJECT NEXUS
-                        <span className="text-[10px] bg-purple-500/10 text-purple-400 px-3 py-1 rounded-full border border-purple-500/20 font-bold tracking-widest uppercase">
+                        <span className="text-[10px] bg-purple-500/10 text-purple-400 px-3 py-1 rounded-xl border border-purple-500/20 font-bold tracking-widest uppercase">
                             Secure Node
                         </span>
                     </h2>
@@ -205,7 +205,7 @@ const ProjectManager = () => {
                 <div className="xl:col-span-5 space-y-6">
                     <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-lg bg-purple-500/10 flex items-center justify-center border border-purple-500/20">
+                            <div className="w-8 h-8 rounded-xl bg-purple-500/10 flex items-center justify-center border border-purple-500/20">
                                 <Braces className="w-4 h-4 text-purple-400" />
                             </div>
                             <h3 className="text-lg font-bold text-white tracking-tight">Configuration Hub</h3>
@@ -223,7 +223,7 @@ const ProjectManager = () => {
                         )}
                     </div>
 
-                    <form onSubmit={handleSubmit} className="bg-zinc-900/40 p-6 md:p-8 rounded-3xl border border-white/5 space-y-6 backdrop-blur-3xl relative overflow-hidden shadow-2xl ring-1 ring-white/5 group">
+                    <form onSubmit={handleSubmit} className="bg-zinc-900/40 p-6 md:p-8 rounded-xl border border-white/5 space-y-6 backdrop-blur-3xl relative overflow-hidden shadow-2xl ring-1 ring-white/5 group">
                         <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-blue-500/5 pointer-events-none" />
 
                         <div className="space-y-5 relative z-10">
@@ -322,7 +322,7 @@ const ProjectManager = () => {
                                     placeholder="Direct Media URL..."
                                     value={currentProject.media}
                                     onChange={handleInputChange}
-                                    className="w-full bg-black/50 border border-white/5 rounded-lg p-2 text-[9px] text-zinc-500 outline-none truncate font-bold"
+                                    className="w-full bg-black/50 border border-white/5 rounded-xl p-2 text-[9px] text-zinc-500 outline-none truncate font-bold"
                                     required
                                 />
                             </div>
@@ -358,22 +358,22 @@ const ProjectManager = () => {
                 {/* Live Preview Section */}
                 <div className="xl:col-span-7 space-y-6">
                     <div className="flex items-center gap-3 mb-4">
-                        <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20">
+                        <div className="w-8 h-8 rounded-xl bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20">
                             <Eye className="w-4 h-4 text-emerald-500" />
                         </div>
                         <h3 className="text-lg font-bold text-white tracking-tight">Active Rendering</h3>
                     </div>
 
-                    <div className="bg-black/60 rounded-3xl border border-white/10 backdrop-blur-3xl p-6 md:p-12 flex flex-col items-center justify-center relative lg:sticky lg:top-8 overflow-hidden min-h-[600px]">
+                    <div className="bg-black/60 rounded-xl border border-white/10 backdrop-blur-3xl p-6 md:p-12 flex flex-col items-center justify-center relative lg:sticky lg:top-8 overflow-hidden min-h-[600px]">
                         <div className="absolute inset-0 tech-grid-bg opacity-30" />
 
                         {/* Status Float */}
                         <div className="absolute top-6 left-6 flex items-center gap-3">
-                            <div className="flex items-center gap-2 bg-emerald-500/10 px-3 py-1.5 rounded-full border border-emerald-500/20 text-emerald-400 text-[10px] font-black uppercase tracking-widest">
-                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                            <div className="flex items-center gap-2 bg-emerald-500/10 px-3 py-1.5 rounded-xl border border-emerald-500/20 text-emerald-400 text-[10px] font-black uppercase tracking-widest">
+                                <span className="w-1.5 h-1.5 rounded-xl bg-emerald-500 animate-pulse" />
                                 Live Buffer
                             </div>
-                            <div className="bg-white/5 px-3 py-1.5 rounded-full border border-white/10 text-white/50 text-[10px] font-black uppercase tracking-widest">
+                            <div className="bg-white/5 px-3 py-1.5 rounded-xl border border-white/10 text-white/50 text-[10px] font-black uppercase tracking-widest">
                                 Rendering: 120fps
                             </div>
                         </div>
@@ -381,7 +381,7 @@ const ProjectManager = () => {
                         {/* Preview Card */}
                         <motion.div
                             layoutId={currentProject.id || 'preview'}
-                            className="group relative w-full lg:w-[500px] bg-zinc-950 rounded-[2.5rem] border border-white/10 overflow-hidden shadow-2xl transition-all duration-500 hover:border-purple-500/50"
+                            className="group relative w-full lg:w-[500px] bg-zinc-950 rounded-xl border border-white/10 overflow-hidden shadow-2xl transition-all duration-500 hover:border-purple-500/50"
                         >
                             <div className="aspect-[16/10] overflow-hidden relative">
                                 {currentProject.media ? (
@@ -392,7 +392,7 @@ const ProjectManager = () => {
                                     />
                                 ) : (
                                     <div className="w-full h-full bg-zinc-900 flex flex-col items-center justify-center gap-4 text-zinc-700">
-                                        <div className="w-16 h-16 rounded-full border-2 border-dashed border-current flex items-center justify-center animate-[spin_10s_linear_infinite]">
+                                        <div className="w-16 h-16 rounded-xl border-2 border-dashed border-current flex items-center justify-center animate-[spin_10s_linear_infinite]">
                                             <Box className="w-8 h-8" />
                                         </div>
                                         <p className="text-[10px] font-black uppercase tracking-[0.3em]">Awaiting Asset</p>
@@ -401,10 +401,10 @@ const ProjectManager = () => {
 
                                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent p-8 flex flex-col justify-end">
                                     <div className="flex items-center gap-2 mb-2">
-                                        <span className="px-3 py-1 bg-purple-500 text-white text-[9px] font-black uppercase tracking-widest rounded-full">
+                                        <span className="px-3 py-1 bg-purple-500 text-white text-[9px] font-black uppercase tracking-widest rounded-xl">
                                             {currentProject.category}
                                         </span>
-                                        <span className="px-3 py-1 bg-white/10 backdrop-blur-md text-white text-[9px] font-black uppercase tracking-widest rounded-full border border-white/10">
+                                        <span className="px-3 py-1 bg-white/10 backdrop-blur-md text-white text-[9px] font-black uppercase tracking-widest rounded-xl border border-white/10">
                                             {currentProject.status}
                                         </span>
                                     </div>
@@ -421,7 +421,7 @@ const ProjectManager = () => {
                                 <div className="flex flex-wrap gap-2">
                                     {(typeof currentProject.technologies === 'string' ? currentProject.technologies.split(',') : currentProject.technologies || []).map((tech, i) => (
                                         tech && (
-                                            <span key={i} className="text-[9px] font-black px-3 py-1.5 rounded-lg bg-zinc-900 border border-white/5 text-zinc-300 uppercase tracking-widest">
+                                            <span key={i} className="text-[9px] font-black px-3 py-1.5 rounded-xl bg-zinc-900 border border-white/5 text-zinc-300 uppercase tracking-widest">
                                                 {tech.trim()}
                                             </span>
                                         )
@@ -451,7 +451,7 @@ const ProjectManager = () => {
                 <div className="flex flex-col xl:flex-row justify-between items-end gap-6">
                     <div className="w-full xl:w-auto">
                         <h3 className="text-xl font-bold text-white flex items-center gap-3 mb-2 ">
-                            <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_10px_#10b981]" />
+                            <div className="w-2 h-2 rounded-xl bg-emerald-500 animate-pulse shadow-[0_0_10px_#10b981]" />
                             Registry Map
                         </h3>
                         <p className="text-[10px] text-zinc-500 uppercase font-black tracking-widest">Authenticated Access Points ({filteredProjects.length})</p>
@@ -510,25 +510,25 @@ const ProjectManager = () => {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, scale: 0.9 }}
-                                className="group relative bg-zinc-900/20 border border-white/5 rounded-[2rem] overflow-hidden flex flex-col hover:border-purple-500/30 transition-all duration-500 hover:shadow-2xl hover:shadow-purple-900/5"
+                                className="group relative bg-zinc-900/20 border border-white/5 rounded-xl overflow-hidden flex flex-col hover:border-purple-500/30 transition-all duration-500 hover:shadow-2xl hover:shadow-purple-900/5"
                             >
                                 <div className="aspect-video relative overflow-hidden bg-zinc-950 border-b border-white/5">
                                     <img src={project.media} alt={project.title} className="w-full h-full object-cover opacity-40 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000" />
 
                                     {/* Badges */}
                                     <div className="absolute top-4 left-4 flex flex-col gap-2 pointer-events-none z-10">
-                                        <div className="bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/10 flex items-center gap-2">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                                        <div className="bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-xl border border-white/10 flex items-center gap-2">
+                                            <span className="w-1.5 h-1.5 rounded-xl bg-emerald-500" />
                                             <span className="text-[8px] font-black text-white uppercase tracking-widest">{project.category}</span>
                                         </div>
                                         {project.pinned && (
-                                            <div className="bg-purple-500 px-2.5 py-1 rounded-full border border-purple-400 flex items-center gap-2 shadow-[0_0_15px_rgba(168,85,247,0.3)]">
+                                            <div className="bg-purple-500 px-2.5 py-1 rounded-xl border border-purple-400 flex items-center gap-2 shadow-[0_0_15px_rgba(168,85,247,0.3)]">
                                                 <Pin className="w-2.5 h-2.5 text-white" />
                                                 <span className="text-[8px] font-black text-white uppercase tracking-widest">Priority</span>
                                             </div>
                                         )}
                                         {project.status === 'Archived' && (
-                                            <div className="bg-zinc-700 px-2.5 py-1 rounded-full border border-white/10 flex items-center gap-2">
+                                            <div className="bg-zinc-700 px-2.5 py-1 rounded-xl border border-white/10 flex items-center gap-2">
                                                 <Archive className="w-2.5 h-2.5 text-white" />
                                                 <span className="text-[8px] font-black text-white uppercase tracking-widest">Archived</span>
                                             </div>
@@ -542,7 +542,7 @@ const ProjectManager = () => {
                                                 e.stopPropagation();
                                                 setActiveActionMenu(activeActionMenu === project.id ? null : project.id);
                                             }}
-                                            className="lg:hidden w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/10 flex items-center justify-center text-white"
+                                            className="lg:hidden w-8 h-8 rounded-xl bg-black/60 backdrop-blur-md border border-white/10 flex items-center justify-center text-white"
                                         >
                                             <MoreVertical className="w-4 h-4" />
                                         </button>
@@ -616,12 +616,12 @@ const ProjectManager = () => {
                                     </p>
                                     <div className="flex flex-wrap gap-1.5 mt-auto">
                                         {Array.isArray(project.technologies) && project.technologies.slice(0, 3).map((tech, i) => (
-                                            <span key={i} className="text-[8px] bg-white/5 px-2.5 py-1 rounded-lg border border-white/5 text-zinc-400 font-black uppercase tracking-widest whitespace-nowrap">
+                                            <span key={i} className="text-[8px] bg-white/5 px-2.5 py-1 rounded-xl border border-white/5 text-zinc-400 font-black uppercase tracking-widest whitespace-nowrap">
                                                 {tech}
                                             </span>
                                         ))}
                                         {Array.isArray(project.technologies) && project.technologies.length > 3 && (
-                                            <span className="text-[8px] bg-white/5 px-2 py-1 rounded-lg border border-white/5 text-zinc-600 font-black">
+                                            <span className="text-[8px] bg-white/5 px-2 py-1 rounded-xl border border-white/5 text-zinc-600 font-black">
                                                 +{project.technologies.length - 3}
                                             </span>
                                         )}
@@ -633,7 +633,7 @@ const ProjectManager = () => {
                 </div>
 
                 {filteredProjects.length === 0 && (
-                    <div className="flex flex-col items-center justify-center py-20 bg-zinc-900/20 rounded-3xl border border-white/5 border-dashed">
+                    <div className="flex flex-col items-center justify-center py-20 bg-zinc-900/20 rounded-xl border border-white/5 border-dashed">
                         <Box className="w-12 h-12 text-zinc-800 mb-4" />
                         <h4 className="text-zinc-600 font-black uppercase tracking-[0.3em]">No Active Nodes In Range</h4>
                     </div>
@@ -654,13 +654,13 @@ const ProjectManager = () => {
                             initial={{ scale: 0.9, opacity: 0, y: 20 }}
                             animate={{ scale: 1, opacity: 1, y: 0 }}
                             exit={{ scale: 0.9, opacity: 0, y: 20 }}
-                            className="bg-zinc-950 border border-white/10 rounded-[3rem] p-10 max-w-md w-full shadow-[0_0_100px_rgba(239,68,68,0.1)] relative overflow-hidden"
+                            className="bg-zinc-950 border border-white/10 rounded-xl p-10 max-w-md w-full shadow-[0_0_100px_rgba(239,68,68,0.1)] relative overflow-hidden"
                             onClick={(e) => e.stopPropagation()}
                         >
                             <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-red-600 via-orange-500 to-red-600" />
 
                             <div className="flex flex-col items-center text-center space-y-6">
-                                <div className="w-20 h-20 bg-red-500/10 rounded-full flex items-center justify-center border border-red-500/20">
+                                <div className="w-20 h-20 bg-red-500/10 rounded-xl flex items-center justify-center border border-red-500/20">
                                     <Shield className="w-10 h-10 text-red-500" />
                                 </div>
 

@@ -152,8 +152,8 @@ const Footer = () => {
             <div className="relative group">
               <div className="absolute -inset-1 bg-gradient-to-r from-purple-500/20 to-blue-500/20 rounded-xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
               <div className="relative bg-zinc-900/80 backdrop-blur-xl border border-white/10 p-6 sm:p-10 md:p-12 rounded-xl shadow-2xl overflow-hidden">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-                <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 pointer-events-none" />
+                <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/10 rounded-xl blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/10 rounded-xl blur-3xl translate-y-1/2 -translate-x-1/2 pointer-events-none" />
 
                 <form ref={form} onSubmit={handleSubmit} className="relative z-10 space-y-8">
                   <div className="grid md:grid-cols-2 gap-6">
@@ -210,7 +210,7 @@ const Footer = () => {
         <div className="mt-24 pt-8 border-t border-zinc-900 flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex gap-4">
             {socialLinks.map((social, idx) => (
-              <motion.a key={idx} href={social.link} target="_blank" rel="noreferrer" whileHover={{ y: -5, scale: 1.1 }} whileTap={{ scale: 0.95 }} className="w-12 h-12 rounded-full border border-zinc-800 flex items-center justify-center text-zinc-500 hover:text-white hover:border-purple-500 hover:bg-purple-500/10 transition-all relative group bg-zinc-900/50">
+              <motion.a key={idx} href={social.link} target="_blank" rel="noreferrer" whileHover={{ y: -5, scale: 1.1 }} whileTap={{ scale: 0.95 }} className="w-12 h-12 rounded-xl border border-zinc-800 flex items-center justify-center text-zinc-500 hover:text-white hover:border-purple-500 hover:bg-purple-500/10 transition-all relative group bg-zinc-900/50">
                 <div className="text-lg">{social.icon}</div>
                 <span className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-zinc-800 text-[10px] font-bold text-white rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none border border-white/5 uppercase tracking-widest">{social.label}</span>
               </motion.a>
@@ -221,8 +221,8 @@ const Footer = () => {
             <div className="flex flex-wrap justify-center md:justify-end gap-3 sm:gap-4 items-center mb-2 italic">
               <span className="text-zinc-500 hover:text-white transition-colors">© {currentTime.getFullYear()} {settings?.name || "Rishabh Tomar"}</span>
               <span className="text-zinc-800 hidden sm:inline">|</span>
-              <div className="font-bold text-zinc-400 flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/5">
-                <span className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse"></span>
+              <div className="font-bold text-zinc-400 flex items-center gap-1.5 px-3 py-1 rounded-xl bg-white/5 border border-white/5">
+                <span className="w-1.5 h-1.5 rounded-xl bg-purple-500 animate-pulse"></span>
                 <span>
                   {currentTime.toLocaleTimeString('en-US', { timeZone: 'Asia/Kolkata', hour12: true, hour: '2-digit', minute: '2-digit', second: '2-digit' })}
                 </span>
@@ -231,15 +231,15 @@ const Footer = () => {
             </div>
 
             <div className="flex flex-wrap justify-center md:justify-end items-center gap-2 sm:gap-3">
-              <div className="flex items-center gap-2 text-emerald-400 bg-emerald-500/5 px-3 py-1 rounded-full border border-emerald-500/10 hover:bg-emerald-500/10 transition-colors cursor-default">
+              <div className="flex items-center gap-2 text-emerald-400 bg-emerald-500/5 px-3 py-1 rounded-xl border border-emerald-500/10 hover:bg-emerald-500/10 transition-colors cursor-default">
                 <span className="relative flex h-1.5 w-1.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-xl bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-xl h-1.5 w-1.5 bg-emerald-500"></span>
                 </span>
                 <span className="tracking-wider text-[9px] font-bold">Protocol Online</span>
               </div>
 
-              <Link to="/admin" className="flex items-center gap-2 text-zinc-600 hover:text-purple-400 transition-all hover:bg-purple-500/5 px-3 py-1 rounded-full border border-transparent hover:border-purple-500/10 group">
+              <Link to="/admin" className="flex items-center gap-2 text-zinc-600 hover:text-purple-400 transition-all hover:bg-purple-500/5 px-3 py-1 rounded-xl border border-transparent hover:border-purple-500/10 group">
                 <FaLock className="text-[9px] group-hover:animate-pulse" />
                 <span className="tracking-widest text-[9px]">RESTRICTED ACCESS</span>
               </Link>

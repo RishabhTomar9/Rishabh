@@ -105,7 +105,7 @@ const Header = () => {
     },
     open: {
       x: "0vw",
-      transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } 
+      transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] }
     }
   };
 
@@ -178,20 +178,20 @@ const Header = () => {
         <div className="flex items-center gap-4 md:gap-6 justify-end z-10 relative">
 
           {/* Drop Mail Button (Desktop Only) */}
-          <a 
+          <a
             href={`mailto:${settings?.email || 'rishabhtomar9999@gmail.com'}?subject=Project%20Inquiry`}
-            className="hidden md:flex group relative items-center gap-4 px-6 py-2.5 rounded-full overflow-hidden transition-all duration-500 bg-white/[0.02] hover:bg-purple-500/[0.05] border border-white/5 hover:border-purple-500/30 backdrop-blur-md shadow-lg hover:shadow-[0_0_20px_rgba(168,85,247,0.15)]"
+            className="hidden md:flex group relative items-center gap-4 px-6 py-2.5 rounded-xl overflow-hidden transition-all duration-500 bg-white/[0.02] hover:bg-purple-500/[0.05] border border-white/5 hover:border-purple-500/30 backdrop-blur-md shadow-lg hover:shadow-[0_0_20px_rgba(168,85,247,0.15)]"
           >
             <span className="relative z-10 text-[10px] tracking-[0.25em] font-bold uppercase text-zinc-400 group-hover:text-purple-100 transition-colors duration-300">
-                Drop Mail
+              Drop Mail
             </span>
-            
-            <div className="relative z-10 flex items-center justify-center w-6 h-6 rounded-full bg-white/5 group-hover:bg-purple-500/20 transition-all duration-300 border border-white/5 group-hover:border-purple-500/30 shadow-[0_0_10px_rgba(0,0,0,0.5)] overflow-hidden">
-                <svg className="w-2.5 h-2.5 text-zinc-400 group-hover:text-purple-300 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
+
+            <div className="relative z-10 flex items-center justify-center w-6 h-6 rounded-xl bg-white/5 group-hover:bg-purple-500/20 transition-all duration-300 border border-white/5 group-hover:border-purple-500/30 shadow-[0_0_10px_rgba(0,0,0,0.5)] overflow-hidden">
+              <svg className="w-2.5 h-2.5 text-zinc-400 group-hover:text-purple-300 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
             </div>
-            
+
             {/* Sweeping Light Effect */}
             <motion.div
               className="absolute inset-0 w-[200%] h-full bg-gradient-to-r from-transparent via-purple-500/10 to-transparent skew-x-[-20deg] pointer-events-none"
@@ -203,15 +203,15 @@ const Header = () => {
           {/* Menu Toggle Button */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className={`group relative z-[1100] flex items-center gap-4 px-5 py-2.5 focus:outline-none transition-all duration-500 rounded-full backdrop-blur-md overflow-hidden ${menuOpen
+            className={`group relative z-[1100] flex items-center gap-4 px-5 py-2.5 focus:outline-none transition-all duration-500 rounded-xl backdrop-blur-md overflow-hidden ${menuOpen
               ? 'bg-transparent text-white border border-transparent'
               : 'bg-white/[0.02] hover:bg-white/[0.08] border border-white/5 hover:border-white/20 text-zinc-300 shadow-lg'}`}
           >
             {!menuOpen && (
               <div className="flex items-center gap-3 hidden sm:flex relative z-10">
                 <div className="relative flex items-center justify-center">
-                  <div className="w-1.5 h-1.5 rounded-full bg-purple-500" />
-                  <div className="absolute w-1.5 h-1.5 rounded-full bg-purple-500 animate-ping opacity-75" />
+                  <div className="w-1.5 h-1.5 rounded-xl bg-purple-500" />
+                  <div className="absolute w-1.5 h-1.5 rounded-xl bg-purple-500 animate-ping opacity-75" />
                 </div>
                 <span className="text-[10px] font-bold tracking-[0.25em] uppercase">Menu</span>
               </div>
@@ -286,12 +286,12 @@ const Header = () => {
                     {/* Close Button Inside Drawer */}
                     <div className="hidden md:flex absolute top-12 right-12 z-50 items-center gap-6">
                       <div className="flex items-center gap-3">
-                        <div className="w-2 h-2 rounded-full bg-purple-500 animate-pulse shadow-[0_0_10px_rgba(168,85,247,0.8)]" />
+                        <div className="w-2 h-2 rounded-xl bg-purple-500 animate-pulse shadow-[0_0_10px_rgba(168,85,247,0.8)]" />
                         <span className="text-xs font-bold text-zinc-500 tracking-[0.25em] uppercase">Rishabh's Portfolio</span>
                       </div>
                       <button
                         onClick={() => setMenuOpen(false)}
-                        className="w-12 h-12 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-zinc-400 hover:text-white transition-all transform hover:rotate-90 duration-300 border border-white/5"
+                        className="w-12 h-12 rounded-xl bg-white/5 hover:bg-white/10 flex items-center justify-center text-zinc-400 hover:text-white transition-all transform hover:rotate-90 duration-300 border border-white/5"
                       >
                         <HiOutlineX size={24} />
                       </button>
@@ -317,7 +317,7 @@ const Header = () => {
                               href={social.link}
                               target="_blank"
                               rel="noreferrer"
-                              className={`w-14 h-14 sm:w-16 sm:h-16 md:w-full aspect-square md:aspect-auto md:py-5 rounded-2xl border border-white/5 bg-white/[0.02] flex flex-row items-center justify-center gap-4 text-zinc-500 hover:text-white hover:bg-white/10 hover:border-purple-500/50 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] transition-all duration-300 group ${socialLinks.length % 2 !== 0 && idx === socialLinks.length - 1 ? 'md:col-span-2' : ''}`}
+                              className={`w-14 h-14 sm:w-16 sm:h-16 md:w-full aspect-square md:aspect-auto md:py-5 rounded-xl border border-white/5 bg-white/[0.02] flex flex-row items-center justify-center gap-4 text-zinc-500 hover:text-white hover:bg-white/10 hover:border-purple-500/50 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] transition-all duration-300 group ${socialLinks.length % 2 !== 0 && idx === socialLinks.length - 1 ? 'md:col-span-2' : ''}`}
                             >
                               <span className="text-xl md:text-2xl group-hover:scale-110 transition-transform duration-500 ease-out drop-shadow-lg">
                                 {social.icon}
@@ -346,12 +346,12 @@ const Header = () => {
                       {/* Mobile Header Inside Drawer */}
                       <div className="md:hidden flex justify-between items-center mb-10 pb-6 relative z-10 border-b border-white/10">
                         <div className="flex items-center gap-3">
-                          <div className="w-2 h-2 rounded-full bg-purple-500 animate-pulse shadow-[0_0_10px_rgba(168,85,247,0.8)]" />
+                          <div className="w-2 h-2 rounded-xl bg-purple-500 animate-pulse shadow-[0_0_10px_rgba(168,85,247,0.8)]" />
                           <span className="text-[10px] font-bold text-zinc-500 tracking-[0.3em] uppercase">Navigation</span>
                         </div>
                         <button
                           onClick={() => setMenuOpen(false)}
-                          className="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-zinc-400 hover:text-white transition-all transform hover:rotate-90 duration-300"
+                          className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 flex items-center justify-center text-zinc-400 hover:text-white transition-all transform hover:rotate-90 duration-300"
                         >
                           <HiOutlineX size={20} />
                         </button>
@@ -390,7 +390,7 @@ const Header = () => {
                                 {activeSection === item && (
                                   <motion.div
                                     layoutId="nav-active-indicator"
-                                    className="absolute left-[-20px] md:left-[-40px] top-1/2 -translate-y-1/2 w-[3px] md:w-1 h-8 md:h-12 bg-gradient-to-b from-purple-400 to-purple-600 rounded-full shadow-[0_0_20px_rgba(168,85,247,0.8)]"
+                                    className="absolute left-[-20px] md:left-[-40px] top-1/2 -translate-y-1/2 w-[3px] md:w-1 h-8 md:h-12 bg-gradient-to-b from-purple-400 to-purple-600 rounded-xl shadow-[0_0_20px_rgba(168,85,247,0.8)]"
                                   />
                                 )}
                               </a>

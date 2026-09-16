@@ -76,7 +76,7 @@ const ScrollStatus = () => {
                         {sections.map((s) => (
                             <motion.div
                                 key={s.id}
-                                className={`h-1 rounded-full transition-all duration-500 ${activeSection === s.id ? 'w-8 bg-purple-500' : 'w-2 bg-zinc-800'
+                                className={`h-1 rounded-xl transition-all duration-500 ${activeSection === s.id ? 'w-8 bg-purple-500' : 'w-2 bg-zinc-800'
                                     }`}
                             />
                         ))}

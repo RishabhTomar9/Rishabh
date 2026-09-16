@@ -254,7 +254,7 @@ const ExperienceManager = () => {
                 {/* List */}
                 <div className="lg:col-span-7 space-y-4">
                     <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
+                        <span className="w-2 h-2 rounded-xl bg-blue-500 animate-pulse" />
                         Timeline Entries ({experiences.length})
                     </h3>
 
@@ -271,14 +271,14 @@ const ExperienceManager = () => {
                                 >
                                     <div className="flex justify-between items-start">
                                         <div className="flex gap-4">
-                                            <div className={`p-3 rounded-lg bg-white/5 border border-white/5 text-xl ${exp.color}`}>
+                                            <div className={`p-3 rounded-xl bg-white/5 border border-white/5 text-xl ${exp.color}`}>
                                                 {renderDynamicIcon(exp.iconName, { size: 24 })}
                                             </div>
                                             <div>
                                                 <h4 className="font-bold text-white text-lg">{exp.company}</h4>
                                                 <div className="flex items-center gap-2 text-sm text-zinc-400">
                                                     <span>{exp.role}</span>
-                                                    <span className="w-1 h-1 rounded-full bg-zinc-600" />
+                                                    <span className="w-1 h-1 rounded-xl bg-zinc-600" />
                                                     <span className="font-bold text-xs">{exp.period}</span>
                                                 </div>
                                                 <div className="flex gap-2 mt-2">
@@ -290,10 +290,10 @@ const ExperienceManager = () => {
                                         <div className="flex md:flex-col gap-2">
                                             {/* Desktop Actions */}
                                             <div className="hidden lg:flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                <button onClick={() => handleEdit(exp)} className="p-2 hover:bg-white/10 rounded-lg text-blue-400 transition-colors">
+                                                <button onClick={() => handleEdit(exp)} className="p-2 hover:bg-white/10 rounded-xl text-blue-400 transition-colors">
                                                     <FaEdit />
                                                 </button>
-                                                <button onClick={() => handleDelete(exp)} className="p-2 hover:bg-red-500/10 rounded-lg text-red-400 transition-colors">
+                                                <button onClick={() => handleDelete(exp)} className="p-2 hover:bg-red-500/10 rounded-xl text-red-400 transition-colors">
                                                     <FaTrash />
                                                 </button>
                                             </div>
@@ -302,7 +302,7 @@ const ExperienceManager = () => {
                                             <div className="lg:hidden relative">
                                                 <button
                                                     onClick={() => setActiveActionMenu(activeActionMenu === exp.id ? null : exp.id)}
-                                                    className="p-2 bg-white/5 border border-white/10 rounded-lg text-zinc-400"
+                                                    className="p-2 bg-white/5 border border-white/10 rounded-xl text-zinc-400"
                                                 >
                                                     {renderDynamicIcon('MoreVertical', { size: 16 })}
                                                 </button>
@@ -357,8 +357,8 @@ const ExperienceManager = () => {
                             <h3 className="text-xl font-bold text-white mb-2">Delete Entry?</h3>
                             <p className="text-zinc-400 text-sm mb-6">Permanently remove <span className="text-white font-bold">{expToDelete?.company}</span> from your timeline?</p>
                             <div className="flex justify-end gap-3">
-                                <button onClick={() => setIsDeleteModalOpen(false)} className="px-4 py-2 rounded-lg text-zinc-400 hover:text-white transition-colors text-sm font-bold">Cancel</button>
-                                <button onClick={confirmDelete} className="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-500 transition-colors text-sm font-bold">Delete</button>
+                                <button onClick={() => setIsDeleteModalOpen(false)} className="px-4 py-2 rounded-xl text-zinc-400 hover:text-white transition-colors text-sm font-bold">Cancel</button>
+                                <button onClick={confirmDelete} className="px-4 py-2 rounded-xl bg-red-600 text-white hover:bg-red-500 transition-colors text-sm font-bold">Delete</button>
                             </div>
                         </motion.div>
                     </div>

@@ -44,7 +44,7 @@ const ProjectDetail = () => {
         return (
             <div className="min-h-screen bg-[#050505] flex items-center justify-center">
                 <div className="relative">
-                    <div className="w-16 h-16 border-4 border-purple-500/30 border-t-purple-500 rounded-full animate-spin" />
+                    <div className="w-16 h-16 border-4 border-purple-500/30 border-t-purple-500 rounded-xl animate-spin" />
                     <div className="absolute inset-0 flex items-center justify-center font-bold text-[10px] font-bold text-purple-500 animate-pulse">LOAD</div>
                 </div>
             </div>
@@ -65,7 +65,7 @@ const ProjectDetail = () => {
                         onClick={() => navigate(-1)}
                         className="group flex items-center gap-3 text-zinc-400 hover:text-white transition-colors"
                     >
-                        <div className="w-10 h-10 rounded-full bg-white/5 border border-white/5 flex items-center justify-center group-hover:bg-purple-500/20 group-hover:border-purple-500/30 transition-all">
+                        <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center group-hover:bg-purple-500/20 group-hover:border-purple-500/30 transition-all">
                             <FaArrowLeft className="text-sm group-hover:-translate-x-1 transition-transform" />
                         </div>
                         <span className="text-sm font-bold uppercase tracking-wider">Back to Archives</span>
@@ -74,13 +74,13 @@ const ProjectDetail = () => {
                     <div className="flex items-center gap-1 bg-zinc-900/80 p-1 rounded-xl border border-white/10 backdrop-blur-md shadow-2xl">
                         <button
                             onClick={() => setViewMode('overview')}
-                            className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 ${viewMode === 'overview' ? 'bg-zinc-800 text-white shadow-lg border border-white/10' : 'text-zinc-500 hover:text-zinc-300 hover:bg-white/5'}`}
+                            className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 ${viewMode === 'overview' ? 'bg-zinc-800 text-white shadow-lg border border-white/10' : 'text-zinc-500 hover:text-zinc-300 hover:bg-white/5'}`}
                         >
                             <FaInfoCircle /> Overview
                         </button>
                         <button
                             onClick={() => setViewMode('preview')}
-                            className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 ${viewMode === 'preview' ? 'bg-zinc-800 text-white shadow-lg border border-white/10' : 'text-zinc-500 hover:text-zinc-300 hover:bg-white/5'}`}
+                            className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 ${viewMode === 'preview' ? 'bg-zinc-800 text-white shadow-lg border border-white/10' : 'text-zinc-500 hover:text-zinc-300 hover:bg-white/5'}`}
                         >
                             <FaDesktop /> Live Preview
                         </button>
@@ -136,7 +136,7 @@ const ProjectDetail = () => {
                                     </h3>
                                     <div className="flex flex-wrap gap-2">
                                         {project.technologies?.map((tech, i) => (
-                                            <span key={i} className="px-3 py-1.5 bg-white/5 border border-white/5 rounded-lg text-zinc-300 text-[10px] md:text-xs font-bold uppercase tracking-wider hover:bg-purple-500/10 hover:border-purple-500/20 hover:text-purple-300 transition-all cursor-default">
+                                            <span key={i} className="px-3 py-1.5 bg-white/5 border border-white/5 rounded-xl text-zinc-300 text-[10px] md:text-xs font-bold uppercase tracking-wider hover:bg-purple-500/10 hover:border-purple-500/20 hover:text-purple-300 transition-all cursor-default">
                                                 {tech}
                                             </span>
                                         ))}
@@ -147,8 +147,8 @@ const ProjectDetail = () => {
                             {/* Right Column: Details */}
                             <div className="flex flex-col justify-center">
                                 <div className="mb-4">
-                                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 font-bold text-[10px] uppercase tracking-widest">
-                                        <span className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse" />
+                                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400 font-bold text-[10px] uppercase tracking-widest">
+                                        <span className="w-1.5 h-1.5 rounded-xl bg-purple-500 animate-pulse" />
                                         Project Archive // {project.id ? project.id.slice(0, 6) : '001'}
                                     </div>
                                 </div>
@@ -187,11 +187,11 @@ const ProjectDetail = () => {
                             {/* Browser Bar */}
                             <div className="h-12 bg-[#09090b] border-b border-white/5 flex items-center px-4 gap-4 shrink-0">
                                 <div className="flex gap-2">
-                                    <div className="w-3 h-3 rounded-full bg-[#ff5f56] border border-[#ff5f56]/50" />
-                                    <div className="w-3 h-3 rounded-full bg-[#ffbd2e] border border-[#ffbd2e]/50" />
-                                    <div className="w-3 h-3 rounded-full bg-[#27c93f] border border-[#27c93f]/50" />
+                                    <div className="w-3 h-3 rounded-xl bg-[#ff5f56] border border-[#ff5f56]/50" />
+                                    <div className="w-3 h-3 rounded-xl bg-[#ffbd2e] border border-[#ffbd2e]/50" />
+                                    <div className="w-3 h-3 rounded-xl bg-[#27c93f] border border-[#27c93f]/50" />
                                 </div>
-                                <div className="flex-1 max-w-2xl mx-auto bg-black/50 h-8 rounded-lg border border-white/5 flex items-center px-4 text-[10px] text-zinc-500 font-bold relative group">
+                                <div className="flex-1 max-w-2xl mx-auto bg-black/50 h-8 rounded-xl border border-white/5 flex items-center px-4 text-[10px] text-zinc-500 font-bold relative group">
                                     <span className="truncate w-full text-center group-hover:text-zinc-400 transition-colors">{project.link}</span>
                                     <a href={project.link} target="_blank" rel="noreferrer" className="absolute right-2 text-zinc-500 hover:text-white transition-colors">
                                         <FaExternalLinkAlt />
@@ -215,7 +215,7 @@ const ProjectDetail = () => {
                                         href={project.link}
                                         target="_blank"
                                         rel="noreferrer"
-                                        className="bg-white text-black px-6 py-3 rounded-full font-bold uppercase tracking-wider text-xs shadow-xl transform hover:scale-105 transition-all flex items-center gap-2"
+                                        className="bg-white text-black px-6 py-3 rounded-xl font-bold uppercase tracking-wider text-xs shadow-xl transform hover:scale-105 transition-all flex items-center gap-2"
                                     >
                                         <FaExternalLinkAlt /> Open in New Tab
                                     </a>

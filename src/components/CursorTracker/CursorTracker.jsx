@@ -114,13 +114,13 @@ const CursorTracker = () => {
     <>
       <style>{`
         .cursor-dot {
-          @apply fixed top-0 left-0 w-2.5 h-2.5 bg-white rounded-full pointer-events-none z-[9999] mix-blend-difference;
+          @apply fixed top-0 left-0 w-2.5 h-2.5 bg-white rounded-xl pointer-events-none z-[9999] mix-blend-difference;
           margin-left: -5px;
           margin-top: -5px;
           box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
         }
         .cursor-ghost {
-          @apply fixed top-0 left-0 w-8 h-8 border border-white/10 rounded-full pointer-events-none z-[9998];
+          @apply fixed top-0 left-0 w-8 h-8 border border-white/10 rounded-xl pointer-events-none z-[9998];
           margin-left: -16px;
           margin-top: -16px;
           transition: opacity 0.3s;

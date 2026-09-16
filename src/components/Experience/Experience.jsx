@@ -35,7 +35,7 @@ const ExperienceCard = ({ exp, index, expandedId, setExpandedId }) => {
                     whileInView={{ scale: 1, rotate: isExpanded ? 45 : 0 }}
                     viewport={{ once: true }}
                 >
-                    <div className={`w-1.5 h-1.5 rounded-full ${exp.period === 'Present' ? 'bg-emerald-500 animate-pulse' : 'bg-zinc-600 transition-colors'} ${isExpanded ? 'bg-purple-400' : ''}`} />
+                    <div className={`w-1.5 h-1.5 rounded-xl ${exp.period === 'Present' ? 'bg-emerald-500 animate-pulse' : 'bg-zinc-600 transition-colors'} ${isExpanded ? 'bg-purple-400' : ''}`} />
                 </motion.div>
             </div>
 
@@ -72,14 +72,14 @@ const ExperienceCard = ({ exp, index, expandedId, setExpandedId }) => {
                         <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 pb-5 border-b border-white/5 relative z-10 gap-4 md:gap-0">
                             <div className="flex items-center gap-3">
                                 <div className="flex gap-1">
-                                    <div className={`w-1 h-3 rounded-full ${exp.accent} bg-opacity-80`} />
-                                    <div className={`w-1 h-3 rounded-full ${exp.accent} bg-opacity-40`} />
-                                    <div className="w-1 h-3 rounded-full bg-zinc-800" />
+                                    <div className={`w-1 h-3 rounded-xl ${exp.accent} bg-opacity-80`} />
+                                    <div className={`w-1 h-3 rounded-xl ${exp.accent} bg-opacity-40`} />
+                                    <div className="w-1 h-3 rounded-xl bg-zinc-800" />
                                 </div>
                                 <span className="text-[10px] font-black text-zinc-600 tracking-[0.3em] uppercase">VERIFIED_LOG_00{index + 1}</span>
                             </div>
                             <div className="flex items-center gap-3">
-                                <div className={`w-1.5 h-1.5 rounded-full ${exp.period === 'Present' ? 'bg-emerald-500 shadow-[0_0_8px_#10b981]' : 'bg-zinc-800'}`} />
+                                <div className={`w-1.5 h-1.5 rounded-xl ${exp.period === 'Present' ? 'bg-emerald-500 shadow-[0_0_8px_#10b981]' : 'bg-zinc-800'}`} />
                                 <span className="text-[10px] font-black text-zinc-700 tracking-widest uppercase transition-colors">{exp.period}</span>
                             </div>
                         </div>
@@ -133,9 +133,9 @@ const ExperienceCard = ({ exp, index, expandedId, setExpandedId }) => {
                                             className="mt-8 mb-4 flex items-center gap-3 text-[9px] font-black text-zinc-700 uppercase tracking-widest"
                                         >
                                             <div className="flex gap-1">
-                                                <div className="w-1 h-1 bg-zinc-800 rounded-full animate-bounce" />
-                                                <div className="w-1 h-1 bg-zinc-800 rounded-full animate-bounce [animation-delay:0.2s]" />
-                                                <div className="w-1 h-1 bg-zinc-800 rounded-full animate-bounce [animation-delay:0.4s]" />
+                                                <div className="w-1 h-1 bg-zinc-800 rounded-xl animate-bounce" />
+                                                <div className="w-1 h-1 bg-zinc-800 rounded-xl animate-bounce [animation-delay:0.2s]" />
+                                                <div className="w-1 h-1 bg-zinc-800 rounded-xl animate-bounce [animation-delay:0.4s]" />
                                             </div>
                                             <span className="group-hover:text-zinc-500 transition-colors">Analyze Log Entry // Expand Dossier</span>
                                             <FaChevronDown className="animate-bounce" />
@@ -146,8 +146,8 @@ const ExperienceCard = ({ exp, index, expandedId, setExpandedId }) => {
                                 {/* Professional Status Bar - ALWAYS VISIBLE */}
                                 <div className="flex items-center justify-between pt-8 border-t border-white/5 relative z-10 transition-all duration-500">
                                     <div className="flex items-center gap-6">
-                                        <div className="flex flex-col">                                            <div className={`flex items-center gap-2 px-4 py-1.5 rounded-full bg-black border border-white/5 transition-all ${exp.period === 'Present' ? 'text-emerald-500' : 'text-zinc-600'}`}>
-                                            <div className={`w-1.5 h-1.5 rounded-full ${exp.period === 'Present' ? 'bg-emerald-500 animate-pulse shadow-[0_0_10px_#10b981]' : 'bg-zinc-800'}`} />
+                                        <div className="flex flex-col">                                            <div className={`flex items-center gap-2 px-4 py-1.5 rounded-xl bg-black border border-white/5 transition-all ${exp.period === 'Present' ? 'text-emerald-500' : 'text-zinc-600'}`}>
+                                            <div className={`w-1.5 h-1.5 rounded-xl ${exp.period === 'Present' ? 'bg-emerald-500 animate-pulse shadow-[0_0_10px_#10b981]' : 'bg-zinc-800'}`} />
                                             <span className="text-[9px] font-black uppercase tracking-[0.1em]">{exp.status}</span>
                                         </div>
                                         </div>
@@ -218,7 +218,7 @@ const Experience = () => {
 
                     <div className="hidden md:flex flex-col items-end gap-3 text-right">
                         <div className="flex items-center gap-2 px-4 py-1.5 rounded-sm bg-zinc-900 border border-white/5 uppercase font-black text-[9px] tracking-widest text-zinc-500">
-                            <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_8px_#10b981]" />
+                            <span className="w-1.5 h-1.5 bg-emerald-500 rounded-xl animate-pulse shadow-[0_0_8px_#10b981]" />
                             System_Sync: Active
                         </div>
                         <span className="text-[8px] font-black text-zinc-700 tracking-[0.3em] uppercase">Bhopal//India_Region</span>

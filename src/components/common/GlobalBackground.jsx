@@ -36,16 +36,16 @@ const GlobalBackground = () => {
                 style={{ y }}
                 className="absolute top-0 left-0 w-full h-full overflow-hidden"
             >
-                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-900/10 rounded-full blur-[120px] animate-pulse" style={{ animationDuration: '8s' }}></div>
-                <div className="absolute top-[40%] right-[-10%] w-[30%] h-[50%] bg-blue-900/10 rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '10s', animationDelay: '2s' }}></div>
-                <div className="absolute bottom-[-10%] left-[20%] w-[40%] h-[40%] bg-indigo-900/10 rounded-full blur-[140px] animate-pulse" style={{ animationDuration: '12s', animationDelay: '4s' }}></div>
+                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-900/10 rounded-xl blur-[120px] animate-pulse" style={{ animationDuration: '8s' }}></div>
+                <div className="absolute top-[40%] right-[-10%] w-[30%] h-[50%] bg-blue-900/10 rounded-xl blur-[100px] animate-pulse" style={{ animationDuration: '10s', animationDelay: '2s' }}></div>
+                <div className="absolute bottom-[-10%] left-[20%] w-[40%] h-[40%] bg-indigo-900/10 rounded-xl blur-[140px] animate-pulse" style={{ animationDuration: '12s', animationDelay: '4s' }}></div>
             </motion.div>
 
             {/* Floating Particles */}
             {particles.map((p) => (
                 <motion.div
                     key={p.id}
-                    className="absolute rounded-full bg-white/10"
+                    className="absolute rounded-xl bg-white/10"
                     style={{
                         top: `${p.top}%`,
                         left: `${p.left}%`,
