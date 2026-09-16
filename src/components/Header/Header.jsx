@@ -132,7 +132,7 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-[100] flex flex-col items-center pointer-events-none group/hdr">
+    <header className="fixed top-0 left-0 right-0 z-[100] mt-5 flex flex-col items-center pointer-events-none group/hdr">
       {/* MAIN NAVBAR */}
       <motion.div
         onMouseMove={handleMouseMove}

@@ -64,46 +64,54 @@ const CertificateAchievements = () => {
               href={cert.image}
               target="_blank"
               rel="noopener noreferrer"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, scale: 0.9, y: 30 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.05, duration: 0.5 }}
+              transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
               whileHover={{ y: -5 }}
-              className="group relative aspect-video rounded-xl overflow-hidden cursor-pointer block border border-white/5 shadow-2xl bg-zinc-950"
+              className="block relative group aspect-video rounded-2xl overflow-hidden cursor-pointer border border-white/5 shadow-2xl bg-zinc-950 hover:border-purple-500/30 transition-colors"
             >
               {/* Full Background Image */}
-              <img
-                src={cert.image}
-                alt={cert.title}
-                className="absolute inset-0 w-full h-full object-contain transition-transform duration-700"
-              />
+              <div className="absolute inset-0 w-full h-full">
+                <img
+                    src={cert.image}
+                    alt={cert.title}
+                    className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
 
-              {/* Gradient Overlay - Stronger on Mobile, hover effect on Desktop */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/80 to-transparent opacity-90 md:opacity-60 md:group-hover:opacity-80 transition-opacity duration-300" />
+              {/* Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent opacity-90 md:opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
 
-              {/* Top Right Link Icon - Always visible on Mobile */}
-              <div className="absolute top-4 right-4 bg-white/10 backdrop-blur-md p-2.5 rounded-xl border border-white/20 opacity-100 translate-y-0 md:opacity-0 md:translate-y-4 md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-300 z-20">
+              {/* Moving Glow Border Effect on Hover */}
+              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                  <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-purple-500 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                  <div className="absolute bottom-0 right-0 w-full h-[1px] bg-gradient-to-l from-transparent via-blue-500 to-transparent translate-x-full group-hover:-translate-x-full transition-transform duration-1000" />
+              </div>
+
+              {/* Top Right Link Icon */}
+              <div className="absolute top-4 right-4 bg-white/10 backdrop-blur-md p-2.5 rounded-xl border border-white/20 opacity-100 translate-y-0 md:opacity-0 md:translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 z-20">
                 <FaExternalLinkAlt className="text-white text-xs" />
               </div>
 
-              {/* Content Overlay - Always visible on Mobile */}
+              {/* Content Overlay */}
               <div className="absolute bottom-0 left-0 w-full p-5 sm:p-6 flex flex-col justify-end h-full z-10">
-                <div className="transform translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-transform duration-300">
-                  <div className="flex justify-between items-center mb-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 delay-75">
+                <div className="transform translate-y-0 md:translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                  <div className="flex justify-between items-center mb-2 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-75">
                     <span className="text-[10px] font-bold text-purple-300 bg-purple-500/20 px-2 py-0.5 rounded border border-purple-500/30 uppercase tracking-wider">
                       {cert.date}
                     </span>
-                    <div className="flex items-center gap-1.5 text-emerald-400">
+                    <div className="flex items-center gap-1.5 text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
                       <FaCheckCircle className="text-[10px]" />
                       <span className="text-[9px] font-bold uppercase tracking-widest">Verified</span>
                     </div>
                   </div>
 
-                  <h4 className="text-lg sm:text-xl md:text-2xl font-bold text-white leading-tight mb-1 group-hover:text-purple-100 transition-colors line-clamp-2">
+                  <h4 className="text-lg sm:text-xl md:text-2xl font-bold text-white leading-tight mb-1 group-hover:text-purple-100 transition-colors drop-shadow-2xl">
                     {cert.title}
                   </h4>
 
-                  <div className="h-0.5 w-12 md:group-hover:w-full bg-purple-500 mt-3 transition-all duration-500 ease-out" />
+                  <div className="h-0.5 w-12 group-hover:w-full bg-gradient-to-r from-purple-500 to-blue-500 mt-3 transition-all duration-500 ease-out shadow-[0_0_10px_rgba(168,85,247,0.8)]" />
                 </div>
               </div>
             </motion.a>
@@ -111,13 +119,13 @@ const CertificateAchievements = () => {
         </div>
 
         {/* 2. Badges Collection */}
-        <div className="mb-40">
+        <div className="mb-40 relative">
           <div className="flex items-center justify-center gap-4 mb-20">
-            <div className="h-px w-12 md:w-24 bg-gradient-to-r from-transparent to-zinc-800" />
-            <span className="text-[10px] md:text-xs font-bold text-zinc-500 uppercase tracking-[0.3em] md:tracking-[0.4em] text-center">
+            <div className="h-px w-12 md:w-24 bg-gradient-to-r from-transparent to-zinc-700" />
+            <span className="text-[10px] md:text-xs font-bold text-zinc-400 uppercase tracking-[0.3em] md:tracking-[0.4em] text-center bg-black/50 px-4 py-2 border border-white/5 rounded-full backdrop-blur-md">
               Digital_Assets_Collection
             </span>
-            <div className="h-px w-12 md:w-24 bg-gradient-to-l from-transparent to-zinc-800" />
+            <div className="h-px w-12 md:w-24 bg-gradient-to-l from-transparent to-zinc-700" />
           </div>
 
           <div className="flex flex-wrap justify-center gap-x-8 gap-y-12 md:gap-20">
@@ -128,31 +136,31 @@ const CertificateAchievements = () => {
                 target="_blank"
                 rel="noreferrer"
                 className="group relative flex flex-col items-center justify-center p-2 md:p-4"
-                whileHover={{ y: -8 }}
+                whileHover={{ y: -8, scale: 1.05 }}
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1, type: "spring" }}
+                transition={{ delay: index * 0.1, type: "spring", stiffness: 200, damping: 20 }}
               >
-                {/* Pedestal/Background */}
-                <div className="absolute inset-0 bg-transparent group-hover:bg-purple-500/5 rounded-xl blur-xl transition-colors duration-500 hidden md:block" />
+                {/* 3D Pedestal Highlight */}
+                <div className="absolute bottom-0 w-16 h-4 bg-purple-500/20 rounded-[50%] blur-md group-hover:w-20 group-hover:bg-purple-500/40 transition-all duration-500" />
 
                 <div className="w-20 h-20 md:w-24 md:h-24 relative z-10 flex items-center justify-center transition-all duration-500 drop-shadow-2xl">
-                  <img src={badge.image} alt={badge.title} className="w-full h-full object-contain filter drop-shadow-lg" />
+                  <img src={badge.image} alt={badge.title} className="w-full h-full object-contain filter drop-shadow-[0_10px_20px_rgba(168,85,247,0.3)] group-hover:drop-shadow-[0_20px_30px_rgba(168,85,247,0.6)] transition-all" />
                 </div>
 
                 {/* Mobile Title (Visible Always) */}
-                <div className="mt-4 block md:hidden">
+                <div className="mt-6 block md:hidden">
                   <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-wider text-center max-w-[100px] leading-tight opacity-80">
                     {badge.title}
                   </p>
                 </div>
 
                 {/* Enhanced Tooltip (Desktop Only) */}
-                <div className="hidden md:block absolute -bottom-12 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-20 pointer-events-none">
-                  <div className="bg-zinc-900/90 border border-purple-500/20 px-3 py-2 rounded-xl backdrop-blur-md shadow-2xl flex flex-col items-center">
-                    <div className="w-2 h-2 bg-zinc-900 border-t border-l border-purple-500/20 absolute -top-1 left-1/2 -translate-x-1/2 rotate-45" />
-                    <p className="text-[9px] font-bold text-zinc-200 uppercase tracking-wider whitespace-nowrap">
+                <div className="hidden md:block absolute -bottom-16 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0 z-20 pointer-events-none">
+                  <div className="bg-zinc-900/90 border border-purple-500/30 px-4 py-2.5 rounded-xl backdrop-blur-xl shadow-[0_10px_30px_rgba(0,0,0,0.8)] flex flex-col items-center">
+                    <div className="w-3 h-3 bg-zinc-900 border-t border-l border-purple-500/30 absolute -top-1.5 left-1/2 -translate-x-1/2 rotate-45" />
+                    <p className="text-[9px] font-bold text-white uppercase tracking-[0.2em] whitespace-nowrap">
                       {badge.title}
                     </p>
                   </div>
@@ -169,9 +177,9 @@ const CertificateAchievements = () => {
             whileInView={{ opacity: 1, x: 0 }}
             className="text-3xl md:text-5xl font-black text-white font-tech uppercase flex items-center gap-5"
           >
-            <span className="p-3 rounded-xl bg-orange-500/10 border border-orange-500/20 text-orange-500 relative overflow-hidden">
+            <span className="p-3 rounded-2xl bg-orange-500/10 border border-orange-500/20 text-orange-500 relative overflow-hidden shadow-[0_0_20px_rgba(249,115,22,0.1)]">
               <span className="absolute inset-0 bg-orange-500/20 blur-lg animate-pulse" />
-              <FaTrophy className="text-2xl md:text-3xl relative z-10" />
+              <FaTrophy className="text-2xl md:text-3xl relative z-10 drop-shadow-[0_0_10px_rgba(249,115,22,0.5)]" />
             </span>
             <span>Hall of Fame</span>
           </motion.h3>
@@ -183,25 +191,26 @@ const CertificateAchievements = () => {
                 href={ach.image}
                 target="_blank"
                 rel="noopener noreferrer"
+                initial={{ opacity: 0, scale: 0.9, y: 30 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.1, ease: "easeOut" }}
                 whileHover={{ y: -5 }}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.2 }}
-                className="group relative overflow-hidden rounded-xl bg-zinc-900/40 border border-white/5 p-1 transition-colors hover:border-orange-500/30"
+                className="group block overflow-hidden rounded-2xl bg-zinc-900/40 border border-white/5 p-1 transition-colors hover:border-orange-500/30"
               >
-                <div className="relative h-full bg-zinc-950/80 rounded-[20px] p-6 md:p-8 flex flex-col sm:flex-row justify-between items-center gap-6 overflow-hidden">
+                <div className="relative h-full bg-zinc-950/90 rounded-[20px] p-6 md:p-8 flex flex-col sm:flex-row justify-between items-center gap-6 overflow-hidden">
 
                   {/* Background Glows */}
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/10 rounded-xl blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-                  <div className="absolute bottom-0 left-0 w-32 h-32 bg-purple-500/5 rounded-xl blur-3xl translate-y-1/2 -translate-x-1/2 pointer-events-none" />
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+                  <div className="absolute bottom-0 left-0 w-32 h-32 bg-purple-500/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 pointer-events-none" />
 
                   <div className="relative z-10 flex-1 text-center sm:text-left">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-orange-500/5 border border-orange-500/10 mb-4">
-                      <span className="w-1.5 h-1.5 rounded-xl bg-orange-500 animate-pulse" />
-                      <span className="text-[10px] font-bold text-orange-400 uppercase tracking-widest">{ach.date}</span>
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-orange-500/10 border border-orange-500/20 mb-5 shadow-[0_0_15px_rgba(249,115,22,0.1)]">
+                      <span className="w-1.5 h-1.5 rounded-xl bg-orange-500 animate-pulse shadow-[0_0_10px_rgba(249,115,22,1)]" />
+                      <span className="text-[9px] font-black text-orange-400 uppercase tracking-widest">{ach.date}</span>
                     </div>
 
-                    <h4 className="text-xl md:text-2xl font-black text-white leading-tight mb-2 group-hover:text-orange-100 transition-colors">
+                    <h4 className="text-xl md:text-3xl font-black text-white leading-tight mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-orange-400 group-hover:to-yellow-300 transition-all drop-shadow-xl">
                       {ach.title}
                     </h4>
 
@@ -211,8 +220,8 @@ const CertificateAchievements = () => {
                   </div>
 
                   <div className="relative z-10">
-                    <div className="w-16 h-16 rounded-xl bg-zinc-900 border border-white/5 flex items-center justify-center shadow-xl group-hover:scale-110 group-hover:border-orange-500/30 transition-all duration-300">
-                      <FaMedal className="text-3xl text-zinc-600 group-hover:text-orange-400 switch-colors duration-300" />
+                    <div className="w-20 h-20 rounded-2xl bg-zinc-900 border border-white/5 flex items-center justify-center shadow-[0_20px_40px_rgba(0,0,0,0.8)] group-hover:scale-110 group-hover:border-orange-500/40 group-hover:shadow-[0_0_30px_rgba(249,115,22,0.2)] transition-all duration-300">
+                      <FaMedal className="text-4xl text-zinc-600 group-hover:text-orange-400 transition-colors duration-300 drop-shadow-md" />
                     </div>
                   </div>
                 </div>

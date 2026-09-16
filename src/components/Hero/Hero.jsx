@@ -8,6 +8,7 @@ import { doc, onSnapshot } from 'firebase/firestore';
 
 const Hero = () => {
   const [heroData, setHeroData] = useState(null);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   // Floating effect based on mouse movement
   const containerRef = useRef(null);
@@ -61,16 +62,10 @@ const Hero = () => {
         
         {/* LEFT: INSPIRING TYPOGRAPHY */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
           className="relative z-20 flex flex-col items-start lg:col-span-7"
         >
           {/* Subtle Accent Pill */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4, duration: 1, ease: [0.22, 1, 0.36, 1] }}
             className="inline-flex items-center gap-3 bg-white/5 backdrop-blur-md px-6 py-3 rounded-2xl border border-white/10 shadow-2xl mb-8"
           >
             <div className="relative flex h-2.5 w-2.5">
@@ -152,9 +147,6 @@ const Hero = () => {
 
         {/* RIGHT: THE FLOATING CANVAS (IMAGE) */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           className="relative lg:col-span-5 flex justify-center lg:justify-end perspective-[1000px] mt-12 lg:mt-0"
         >
           {/* Mouse-reactive floating container */}
@@ -168,11 +160,15 @@ const Hero = () => {
             transition={{ type: "spring", stiffness: 75, damping: 25, mass: 1 }}
           >
             {/* The Image Canvas */}
-            <div className="absolute inset-0 rounded-[2rem] overflow-hidden bg-zinc-950 border border-white/5 shadow-[0_30px_80px_rgba(0,0,0,0.8)]">
+            <div className="absolute inset-0 rounded-[2rem] overflow-hidden bg-zinc-950 border border-white/5 shadow-[0_30px_80px_rgba(0,0,0,0.8)] flex items-center justify-center">
+              {!isImageLoaded && (
+                <Lucide.Loader2 className="absolute text-purple-500 animate-spin z-10" size={32} />
+              )}
               <img
                 src={heroData.heroImage || "/Images/hero-image.jpg"}
                 alt={heroData.name}
-                className="w-full h-full object-cover transform scale-105 group-hover:scale-110 transition-transform duration-[2s] ease-out"
+                onLoad={() => setIsImageLoaded(true)}
+                className={`w-full h-full object-cover transform scale-105 group-hover:scale-110 transition-all duration-[2s] ease-out ${isImageLoaded ? 'opacity-100' : 'opacity-0'}`}
                 loading="eager"
               />
 
@@ -187,9 +183,6 @@ const Hero = () => {
             {/* Floating Glass Element */}
             {heroData.company && (
               <motion.div
-                initial={{ y: 30, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 1.2, duration: 1, ease: [0.22, 1, 0.36, 1] }}
                 className="absolute -bottom-4 left-4 sm:-bottom-6 sm:-left-6 md:-left-12 z-20 group/pill flex items-center gap-5 p-4 md:p-5 rounded-3xl bg-zinc-900/40 backdrop-blur-3xl border border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.5)] hover:bg-zinc-900/60 transition-all duration-300"
               >
                 <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center text-blue-400 group-hover/pill:scale-110 transition-transform">

@@ -8,16 +8,24 @@ import Header from './components/Header/Header';
 import Loader from './components/Loader/Loader';
 import CursorTracker from './components/CursorTracker/CursorTracker';
 
-// Lazy Load Page Components
-const Hero = lazy(() => import('./components/Hero/Hero'));
-const About = lazy(() => import('./components/About/About'));
+const lazyWithPreload = (factory) => {
+  const Component = lazy(factory);
+  Component.preload = factory;
+  return Component;
+};
+
+// Lazy Load & Preload Home Page Components
+const Hero = lazyWithPreload(() => import('./components/Hero/Hero'));
+const About = lazyWithPreload(() => import('./components/About/About'));
+const Experience = lazyWithPreload(() => import('./components/Experience/Experience'));
+const Skills = lazyWithPreload(() => import('./components/Skills/Skills'));
+const CertificateAchievements = lazyWithPreload(() => import('./components/CertificateAchievements/CertificateAchievements'));
+const Projects = lazyWithPreload(() => import('./components/Projects/Projects'));
+const Footer = lazyWithPreload(() => import('./components/Footer/Footer'));
+
+// Lazy Load Other Pages
 const Resume = lazy(() => import('./components/Resume/Resume'));
-const Experience = lazy(() => import('./components/Experience/Experience'));
-const Skills = lazy(() => import('./components/Skills/Skills'));
-const CertificateAchievements = lazy(() => import('./components/CertificateAchievements/CertificateAchievements'));
-const Projects = lazy(() => import('./components/Projects/Projects'));
 const ProjectDetail = lazy(() => import('./components/Projects/ProjectDetail'));
-const Footer = lazy(() => import('./components/Footer/Footer'));
 
 // Lazy Load Admin Components
 const Login = lazy(() => import('./components/Admin/Login'));
@@ -104,16 +112,28 @@ function App() {
   // Initialize Lenis smooth scrolling
   useLenis(!loading);
 
+  // Preload heavy components in the background while loader is active
+  useEffect(() => {
+    Hero.preload();
+    About.preload();
+    Experience.preload();
+    Skills.preload();
+    CertificateAchievements.preload();
+    Projects.preload();
+    Footer.preload();
+  }, []);
+
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence>
       {loading ? (
         <Loader key="global-loader" isReady={isDataReady} onFinish={() => setLoading(false)} />
       ) : (
         <motion.div 
           key="main-content" 
-          initial={{ opacity: 0 }} 
-          animate={{ opacity: 1 }} 
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0, scale: 0.98, filter: "blur(10px)" }} 
+          animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }} 
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="relative z-0"
         >
           <Router>
             <ScrollToTop />

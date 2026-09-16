@@ -76,33 +76,6 @@ const Footer = () => {
     }
   };
 
-  const contactItems = [
-    {
-      icon: <FaEnvelope />,
-      label: "Email",
-      value: "Email",
-      detail: settings?.email || "rishabhtomar9999@gmail.com",
-      href: `mailto:${settings?.email || "rishabhtomar9999@gmail.com"}`,
-      color: "purple"
-    },
-    {
-      icon: <FaPhoneAlt />,
-      label: "Phone",
-      value: "Phone",
-      detail: "+91 9981909017",
-      href: "tel:+919981909017",
-      color: "blue"
-    },
-    {
-      icon: <FaMapMarkerAlt />,
-      label: "Location",
-      value: "Location",
-      detail: settings?.location || "Bhopal, India",
-      href: "#",
-      color: "yellow"
-    }
-  ];
-
   const socialLinks = [
     { icon: <FaGithub />, link: settings?.github || "https://github.com/RishabhTomar9", label: "GitHub" },
     { icon: <FaLinkedin />, link: settings?.linkedin || "https://www.linkedin.com/in/rishabhtomar99/", label: "LinkedIn" },
@@ -111,8 +84,28 @@ const Footer = () => {
   ].filter(s => s.link);
 
   return (
-    <footer className="relative pt-32 pb-12 bg-[#050505] overflow-hidden" id="contact">
+    <footer className="relative pt-40 pb-12 bg-[#050505] overflow-hidden" id="contact">
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+
+      {/* Infinite Marquee Top Bar */}
+      <div className="absolute top-0 left-0 w-full overflow-hidden border-y border-white/5 bg-zinc-950/80 backdrop-blur-md py-4 z-20">
+          <motion.div
+            className="flex whitespace-nowrap items-center w-max"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ ease: "linear", duration: 30, repeat: Infinity }}
+          >
+            {[...Array(4)].map((_, idx) => (
+              <div key={idx} className="flex items-center gap-12 text-[10px] font-black uppercase tracking-[0.4em] text-zinc-500 mx-6">
+                <span className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-purple-500 rounded-full animate-pulse shadow-[0_0_10px_#a855f7]" /> OPEN FOR WORK</span>
+                <span className="text-zinc-800">///</span>
+                <span className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse shadow-[0_0_10px_#3b82f6]" /> LET'S COLLABORATE</span>
+                <span className="text-zinc-800">///</span>
+                <span className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_10px_#10b981]" /> AVAILABLE NOW</span>
+                <span className="text-zinc-800">///</span>
+              </div>
+            ))}
+          </motion.div>
+      </div>
 
       <div className="container mx-auto px-6 relative z-10 ">
         <div className="grid lg:grid-cols-12 gap-16 items-start">
@@ -135,58 +128,85 @@ const Footer = () => {
               </p>
 
               <div className="space-y-8">
-                {contactItems.map((item, i) => (
-                  <motion.a key={i} href={item.href} whileHover={{ x: 10 }} className="flex items-center gap-6 group cursor-pointer">
-                    <div className="w-14 h-14 rounded-xl bg-zinc-900/50 border border-white/5 flex items-center justify-center text-xl transition-all duration-300 group-hover:border-purple-500/50 group-hover:shadow-[0_0_20px_rgba(168,85,247,0.15)]">{item.icon}</div>
-                    <div>
-                      <p className="text-xs font-bold text-zinc-500 uppercase tracking-widest mb-1">{item.label}</p>
-                      <p className="text-white text-lg sm:text-xl font-bold tracking-tight group-hover:text-purple-400 transition-colors uppercase font-tech">{item.detail}</p>
-                    </div>
-                  </motion.a>
-                ))}
+                {/* Email */}
+                <motion.a href={`mailto:${settings?.email || "rishabhtomar9999@gmail.com"}`} whileHover={{ x: 10 }} className="flex items-center gap-6 group cursor-pointer">
+                  <div className="w-14 h-14 rounded-2xl bg-zinc-900/50 border border-white/5 flex items-center justify-center text-xl transition-all duration-300 group-hover:border-purple-500/50 group-hover:bg-purple-500/10 group-hover:shadow-[0_0_30px_rgba(168,85,247,0.2)]">
+                      <FaEnvelope className="text-zinc-400 group-hover:text-purple-400 transition-colors" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-1">Email</p>
+                    <p className="text-white text-lg sm:text-xl font-bold tracking-tight group-hover:text-purple-400 transition-colors uppercase font-tech">{settings?.email || "rishabhtomar9999@gmail.com"}</p>
+                  </div>
+                </motion.a>
+
+                {/* Phone */}
+                <motion.a href="tel:+919981909017" whileHover={{ x: 10 }} className="flex items-center gap-6 group cursor-pointer">
+                  <div className="w-14 h-14 rounded-2xl bg-zinc-900/50 border border-white/5 flex items-center justify-center text-xl transition-all duration-300 group-hover:border-blue-500/50 group-hover:bg-blue-500/10 group-hover:shadow-[0_0_30px_rgba(59,130,246,0.2)]">
+                      <FaPhoneAlt className="text-zinc-400 group-hover:text-blue-400 transition-colors" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-1">Phone</p>
+                    <p className="text-white text-lg sm:text-xl font-bold tracking-tight group-hover:text-blue-400 transition-colors uppercase font-tech">+91 9981909017</p>
+                  </div>
+                </motion.a>
+
+                {/* Location with Radar Ping */}
+                <motion.div whileHover={{ x: 10 }} className="flex items-center gap-6 group cursor-default">
+                  <div className="w-14 h-14 rounded-2xl bg-zinc-900/50 border border-white/5 flex items-center justify-center text-xl transition-all duration-300 group-hover:border-yellow-500/50 group-hover:bg-yellow-500/10 group-hover:shadow-[0_0_30px_rgba(234,179,8,0.2)]">
+                      <div className="relative w-6 h-6 flex items-center justify-center">
+                          <FaMapMarkerAlt className="absolute text-zinc-400 group-hover:text-yellow-400 transition-colors z-10" />
+                          <div className="absolute inset-0 bg-yellow-500/30 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      </div>
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-1">Location / Radar</p>
+                    <p className="text-white text-lg sm:text-xl font-bold tracking-tight group-hover:text-yellow-400 transition-colors uppercase font-tech">{settings?.location || "Bhopal, India"}</p>
+                  </div>
+                </motion.div>
               </div>
             </motion.div>
           </div>
 
+          {/* Form Section */}
           <motion.div className="lg:col-span-7 w-full" initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}>
             <div className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-purple-500/20 to-blue-500/20 rounded-xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-              <div className="relative bg-zinc-900/80 backdrop-blur-xl border border-white/10 p-6 sm:p-10 md:p-12 rounded-xl shadow-2xl overflow-hidden">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/10 rounded-xl blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-                <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/10 rounded-xl blur-3xl translate-y-1/2 -translate-x-1/2 pointer-events-none" />
+              <div className="absolute -inset-1 bg-gradient-to-r from-purple-500/20 to-blue-500/20 rounded-[2rem] blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+              <div className="relative bg-zinc-900/80 backdrop-blur-3xl border border-white/10 p-6 sm:p-10 md:p-12 rounded-[2rem] shadow-[0_30px_60px_rgba(0,0,0,0.5)] overflow-hidden">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 pointer-events-none" />
 
                 <form ref={form} onSubmit={handleSubmit} className="relative z-10 space-y-8">
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-3">
-                      <label className="text-xs font-bold text-zinc-400 uppercase tracking-widest ml-1">Name</label>
+                      <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest ml-1">Name</label>
                       <div className="relative group/input">
-                        <FaUser className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within/input:text-purple-400 transition-colors text-sm" />
-                        <input type="text" name="user_name" required placeholder="Authenticated User" className="w-full bg-zinc-950/50 border border-white/10 rounded-xl pl-11 pr-5 py-4 text-white focus:outline-none focus:ring-1 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all placeholder:text-zinc-700 font-bold group-hover/input:border-white/20 uppercase text-xs tracking-wider" />
+                        <FaUser className="absolute left-5 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within/input:text-purple-400 transition-colors text-sm" />
+                        <input type="text" name="user_name" required placeholder="Authenticated User" className="w-full bg-zinc-950 border border-white/5 rounded-2xl pl-12 pr-5 py-4 text-white focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent transition-all placeholder:text-zinc-700 font-bold group-hover/input:border-white/20 uppercase text-[10px] tracking-widest shadow-inner group-focus-within/input:shadow-[0_0_30px_rgba(168,85,247,0.1)]" />
                       </div>
                     </div>
                     <div className="space-y-3">
-                      <label className="text-xs font-bold text-zinc-400 uppercase tracking-widest ml-1">Email Address</label>
+                      <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest ml-1">Email Address</label>
                       <div className="relative group/input">
-                        <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within/input:text-purple-400 transition-colors text-sm" />
-                        <input type="email" name="user_email" required placeholder="user@hostname.com" className="w-full bg-zinc-950/50 border border-white/10 rounded-xl pl-11 pr-5 py-4 text-white focus:outline-none focus:ring-1 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all placeholder:text-zinc-700 font-bold group-hover/input:border-white/20 uppercase text-xs tracking-wider" />
+                        <FaEnvelope className="absolute left-5 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within/input:text-purple-400 transition-colors text-sm" />
+                        <input type="email" name="user_email" required placeholder="user@hostname.com" className="w-full bg-zinc-950 border border-white/5 rounded-2xl pl-12 pr-5 py-4 text-white focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent transition-all placeholder:text-zinc-700 font-bold group-hover/input:border-white/20 uppercase text-[10px] tracking-widest shadow-inner group-focus-within/input:shadow-[0_0_30px_rgba(168,85,247,0.1)]" />
                       </div>
                     </div>
                   </div>
 
                   <div className="space-y-3">
-                    <label className="text-xs font-bold text-zinc-400 uppercase tracking-widest ml-1">Message</label>
+                    <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest ml-1">Message</label>
                     <div className="relative group/input">
-                      <FaCommentDots className="absolute left-4 top-5 text-zinc-500 group-focus-within/input:text-purple-400 transition-colors text-sm" />
-                      <textarea name="message" rows="4" required placeholder="Tell me about your project..." className="w-full bg-zinc-950/50 border border-white/10 rounded-xl pl-11 pr-5 py-4 text-white focus:outline-none focus:ring-1 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all resize-none placeholder:text-zinc-700 font-bold group-hover/input:border-white/20 leading-relaxed text-sm" />
+                      <FaCommentDots className="absolute left-5 top-5 text-zinc-500 group-focus-within/input:text-purple-400 transition-colors text-sm" />
+                      <textarea name="message" rows="4" required placeholder="Tell me about your project..." className="w-full bg-zinc-950 border border-white/5 rounded-2xl pl-12 pr-5 py-4 text-white focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent transition-all resize-none placeholder:text-zinc-700 font-bold group-hover/input:border-white/20 leading-relaxed text-sm shadow-inner group-focus-within/input:shadow-[0_0_30px_rgba(168,85,247,0.1)]" />
                     </div>
                   </div>
 
-                  <button type="submit" disabled={status === 'sending' || status === 'success'} className={`relative w-full overflow-hidden group py-5 rounded-xl font-black tracking-[0.3em] uppercase transition-all flex items-center justify-center gap-3 shadow-lg ${status === 'success' ? 'bg-emerald-500 text-white border-emerald-500' : 'bg-white text-black hover:bg-zinc-200 border-white font-tech'}`}>
+                  <button type="submit" disabled={status === 'sending' || status === 'success'} className={`relative w-full overflow-hidden group py-5 rounded-2xl font-black tracking-[0.3em] uppercase transition-all flex items-center justify-center gap-3 shadow-[0_20px_40px_rgba(0,0,0,0.5)] ${status === 'success' ? 'bg-emerald-500 text-white border-emerald-500' : 'bg-white text-black hover:bg-zinc-200 border-white font-tech hover:shadow-[0_0_30px_rgba(255,255,255,0.3)]'}`}>
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent -translate-x-full group-hover:animate-shimmer" />
                     <AnimatePresence mode="wait">
                       {status === 'idle' && (
                         <motion.div key="idle" className="flex items-center gap-2 relative z-10 italic">
-                          Send Message <FaPaperPlane className="text-xs group-hover:translate-x-1 transition-transform" />
+                          Transmit Signal <FaPaperPlane className="text-xs group-hover:translate-x-2 group-hover:-translate-y-1 transition-transform" />
                         </motion.div>
                       )}
                       {status === 'sending' && (
@@ -196,7 +216,7 @@ const Footer = () => {
                       )}
                       {status === 'success' && (
                         <motion.div key="success" className="flex items-center gap-2 relative z-10">
-                          Signal Transmitted <FaCheckCircle className="text-lg" />
+                          Signal Transmitted <FaCheckCircle className="text-lg shadow-[0_0_10px_#fff] rounded-full" />
                         </motion.div>
                       )}
                     </AnimatePresence>
@@ -207,22 +227,23 @@ const Footer = () => {
           </motion.div>
         </div>
 
-        <div className="mt-24 pt-8 border-t border-zinc-900 flex flex-col md:flex-row justify-between items-center gap-8">
+        {/* Lower Footer */}
+        <div className="mt-24 pt-8 border-t border-zinc-900 flex flex-col md:flex-row justify-between items-center gap-8 relative z-10">
           <div className="flex gap-4">
             {socialLinks.map((social, idx) => (
-              <motion.a key={idx} href={social.link} target="_blank" rel="noreferrer" whileHover={{ y: -5, scale: 1.1 }} whileTap={{ scale: 0.95 }} className="w-12 h-12 rounded-xl border border-zinc-800 flex items-center justify-center text-zinc-500 hover:text-white hover:border-purple-500 hover:bg-purple-500/10 transition-all relative group bg-zinc-900/50">
+              <motion.a key={idx} href={social.link} target="_blank" rel="noreferrer" whileHover={{ y: -5, scale: 1.1 }} whileTap={{ scale: 0.95 }} className="w-12 h-12 rounded-2xl border border-zinc-800 flex items-center justify-center text-zinc-500 hover:text-white hover:border-purple-500 hover:bg-purple-500/20 transition-all relative group bg-zinc-900/50 shadow-xl hover:shadow-[0_0_20px_rgba(168,85,247,0.3)]">
                 <div className="text-lg">{social.icon}</div>
-                <span className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-zinc-800 text-[10px] font-bold text-white rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none border border-white/5 uppercase tracking-widest">{social.label}</span>
+                <span className="absolute -top-12 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-zinc-800 text-[9px] font-bold text-white rounded-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none border border-white/10 uppercase tracking-[0.2em] shadow-xl">{social.label}</span>
               </motion.a>
             ))}
           </div>
 
-          <div className="text-zinc-500 font-black text-[9px] sm:text-[10px] uppercase tracking-[0.3em] flex flex-col md:items-end gap-2 text-center md:text-right leading-relaxed select-none">
-            <div className="flex flex-wrap justify-center md:justify-end gap-3 sm:gap-4 items-center mb-2 italic">
+          <div className="text-zinc-500 font-black text-[9px] sm:text-[10px] uppercase tracking-[0.3em] flex flex-col md:items-end gap-3 text-center md:text-right leading-relaxed select-none">
+            <div className="flex flex-wrap justify-center md:justify-end gap-3 sm:gap-4 items-center mb-1 italic">
               <span className="text-zinc-500 hover:text-white transition-colors">© {currentTime.getFullYear()} {settings?.name || "Rishabh Tomar"}</span>
               <span className="text-zinc-800 hidden sm:inline">|</span>
-              <div className="font-bold text-zinc-400 flex items-center gap-1.5 px-3 py-1 rounded-xl bg-white/5 border border-white/5">
-                <span className="w-1.5 h-1.5 rounded-xl bg-purple-500 animate-pulse"></span>
+              <div className="font-bold text-zinc-400 flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/5 border border-white/5 shadow-inner">
+                <span className="w-1.5 h-1.5 rounded-xl bg-purple-500 animate-pulse shadow-[0_0_5px_#a855f7]"></span>
                 <span>
                   {currentTime.toLocaleTimeString('en-US', { timeZone: 'Asia/Kolkata', hour12: true, hour: '2-digit', minute: '2-digit', second: '2-digit' })}
                 </span>
@@ -231,15 +252,15 @@ const Footer = () => {
             </div>
 
             <div className="flex flex-wrap justify-center md:justify-end items-center gap-2 sm:gap-3">
-              <div className="flex items-center gap-2 text-emerald-400 bg-emerald-500/5 px-3 py-1 rounded-xl border border-emerald-500/10 hover:bg-emerald-500/10 transition-colors cursor-default">
+              <div className="flex items-center gap-2 text-emerald-400 bg-emerald-500/5 px-3 py-1.5 rounded-xl border border-emerald-500/20 hover:bg-emerald-500/10 transition-colors cursor-default shadow-[0_0_15px_rgba(16,185,129,0.1)]">
                 <span className="relative flex h-1.5 w-1.5">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-xl bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-xl h-1.5 w-1.5 bg-emerald-500"></span>
+                  <span className="relative inline-flex rounded-xl h-1.5 w-1.5 bg-emerald-500 shadow-[0_0_5px_#10b981]"></span>
                 </span>
-                <span className="tracking-wider text-[9px] font-bold">Protocol Online</span>
+                <span className="tracking-widest text-[9px] font-bold">Protocol Online</span>
               </div>
 
-              <Link to="/admin" className="flex items-center gap-2 text-zinc-600 hover:text-purple-400 transition-all hover:bg-purple-500/5 px-3 py-1 rounded-xl border border-transparent hover:border-purple-500/10 group">
+              <Link to="/admin" className="flex items-center gap-2 text-zinc-600 hover:text-purple-400 transition-all hover:bg-purple-500/10 px-3 py-1.5 rounded-xl border border-transparent hover:border-purple-500/20 group hover:shadow-[0_0_15px_rgba(168,85,247,0.1)]">
                 <FaLock className="text-[9px] group-hover:animate-pulse" />
                 <span className="tracking-widest text-[9px]">RESTRICTED ACCESS</span>
               </Link>
