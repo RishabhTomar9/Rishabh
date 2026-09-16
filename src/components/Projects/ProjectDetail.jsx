@@ -19,6 +19,18 @@ const ProjectDetail = () => {
     const [orientation, setOrientation] = useState('portrait'); // 'portrait' | 'landscape'
     const [refreshKey, setRefreshKey] = useState(0);
 
+    // Disable body scroll when lightbox is open
+    useEffect(() => {
+        if (lightboxIndex !== null) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [lightboxIndex]);
+
     // Keyboard navigation for Lightbox
     useEffect(() => {
         const handleKeyDown = (e) => {
@@ -439,18 +451,21 @@ const ProjectDetail = () => {
                                 <FaChevronRight className="text-2xl group-hover:translate-x-1 transition-transform" />
                             </button>
 
-                            {/* Image */}
-                            <motion.img 
-                                key={lightboxIndex}
-                                initial={{ opacity: 0, scale: 0.95, x: 20 }}
-                                animate={{ opacity: 1, scale: 1, x: 0 }}
-                                exit={{ opacity: 0, scale: 0.95, x: -20 }}
-                                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                                src={project.gallery[lightboxIndex]} 
-                                alt="Expanded view" 
-                                className="max-w-[90vw] max-h-[85vh] object-contain rounded-xl shadow-2xl border border-white/5 cursor-default pointer-events-auto"
-                                onClick={(e) => e.stopPropagation()} 
-                            />
+                            {/* Image with proper AnimatePresence for internal toggling */}
+                            <div className="max-w-[90vw] max-h-[85vh] relative flex items-center justify-center pointer-events-auto" onClick={(e) => e.stopPropagation()}>
+                                <AnimatePresence mode="wait">
+                                    <motion.img 
+                                        key={lightboxIndex}
+                                        initial={{ opacity: 0, scale: 0.95, x: 20 }}
+                                        animate={{ opacity: 1, scale: 1, x: 0 }}
+                                        exit={{ opacity: 0, scale: 0.95, x: -20 }}
+                                        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                                        src={project.gallery[lightboxIndex]} 
+                                        alt="Expanded view" 
+                                        className="max-w-full max-h-[85vh] object-contain rounded-xl shadow-2xl border border-white/5"
+                                    />
+                                </AnimatePresence>
+                            </div>
                         </motion.div>
                     )}
                 </AnimatePresence>
