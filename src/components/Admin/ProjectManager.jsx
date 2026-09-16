@@ -19,6 +19,7 @@ const ProjectManager = () => {
         link: '',
         github: '',
         media: '',
+        gallery: [],
         technologies: '',
         pinned: false,
         category: 'Web',
@@ -124,6 +125,7 @@ const ProjectManager = () => {
                 link: '',
                 github: '',
                 media: '',
+                gallery: [],
                 technologies: '',
                 pinned: false,
                 category: 'Web',
@@ -142,7 +144,8 @@ const ProjectManager = () => {
             ...project,
             technologies: Array.isArray(project.technologies) ? project.technologies.join(', ') : project.technologies,
             category: project.category || 'Web',
-            status: project.status || 'Production'
+            status: project.status || 'Production',
+            gallery: project.gallery || []
         });
         setIsEditing(true);
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -327,6 +330,48 @@ const ProjectManager = () => {
                                 />
                             </div>
 
+                            {/* Gallery Uploads */}
+                            <div className="space-y-4 pt-4 border-t border-white/5">
+                                <div className="flex items-center justify-between ml-1">
+                                    <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest flex items-center gap-2"><Image className="w-3 h-3" /> Additional Gallery ({currentProject.gallery?.length || 0}/7)</label>
+                                </div>
+                                {(!currentProject.gallery || currentProject.gallery.length < 7) && (
+                                    <ImageUpload
+                                        multiple={true}
+                                        onUploadMultiple={(urls) => {
+                                            const current = currentProject.gallery || [];
+                                            const remaining = 7 - current.length;
+                                            const newUrls = urls.slice(0, remaining);
+                                            setCurrentProject({ ...currentProject, gallery: [...current, ...newUrls] });
+                                        }}
+                                        folder="projects_gallery"
+                                    />
+                                )}
+
+                                {currentProject.gallery && currentProject.gallery.length > 0 && (
+                                    <div className="flex flex-wrap gap-4 mt-4">
+                                        {currentProject.gallery.map((url, i) => (
+                                            <div key={i} className="relative group w-24 h-24 rounded-xl overflow-hidden border border-white/10 shadow-lg">
+                                                <img src={url} alt={`Gallery ${i + 1}`} className="w-full h-full object-cover" />
+                                                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => {
+                                                            const newGallery = [...currentProject.gallery];
+                                                            newGallery.splice(i, 1);
+                                                            setCurrentProject({ ...currentProject, gallery: newGallery });
+                                                        }}
+                                                        className="p-2 bg-red-500/20 text-red-400 hover:bg-red-500 hover:text-white rounded-lg transition-colors border border-red-500/30"
+                                                    >
+                                                        <Trash2 className="w-4 h-4" />
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+
                             {/* Description */}
                             <div className="space-y-2">
                                 <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-1 flex items-center gap-2"><Info className="w-3 h-3" /> Node Intel</label>
@@ -427,12 +472,25 @@ const ProjectManager = () => {
                                         )
                                     ))}
                                 </div>
-                                <div className="pt-4 border-t border-white/5 flex items-center justify-between">
-                                    <div className="flex gap-4">
-                                        <ExternalLink className="w-4 h-4 text-zinc-600" />
-                                        <Github className="w-4 h-4 text-zinc-600" />
+                                <div className="pt-4 border-t border-white/5 flex flex-col gap-4">
+                                    {/* Gallery Preview */}
+                                    {currentProject.gallery && currentProject.gallery.length > 0 && (
+                                        <div className="flex flex-wrap gap-2">
+                                            {currentProject.gallery.map((img, idx) => (
+                                                <div key={idx} className="w-12 h-12 rounded-lg overflow-hidden border border-white/10 opacity-70 hover:opacity-100 transition-opacity cursor-pointer">
+                                                    <img src={img} alt={`Gallery ${idx + 1}`} className="w-full h-full object-cover" />
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+
+                                    <div className="flex items-center justify-between">
+                                        <div className="flex gap-4">
+                                            <ExternalLink className="w-4 h-4 text-zinc-600" />
+                                            <Github className="w-4 h-4 text-zinc-600" />
+                                        </div>
+                                        <ArrowRight className="w-5 h-5 text-purple-500 animate-pulse" />
                                     </div>
-                                    <ArrowRight className="w-5 h-5 text-purple-500 animate-pulse" />
                                 </div>
                             </div>
                         </motion.div>

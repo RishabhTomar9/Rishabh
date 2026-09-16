@@ -20,7 +20,9 @@ const HeroAboutManager = () => {
         companyLink: 'https://zintrixtechnologies.com/',
         description: "I'm Rishabh Tomar. Co-Founder & Co-CTO at Zintrix Technologies. I build high-performance ecosystems where data meets design.",
         resumeLink: '',
-        heroImage: '/Images/hero-image.jpg'
+        heroImage: '/Images/hero-image.jpg',
+        topPillText: 'Visionary Architect',
+        companyPrefix: 'Architecting at'
     });
 
     const [aboutData, setAboutData] = useState({
@@ -30,6 +32,7 @@ const HeroAboutManager = () => {
         status: 'Available',
         quote: "I don't just write code; I architect ecosystems where data flows seamlessly into experience.",
         mainDescription: "I bridge the gap between complex data systems and intuitive user interfaces. My approach is centered on scalability and performance-first architecture.",
+        focusArea: "Full-Stack & Data Architecture",
         // Card 1
         card1Title: 'The Architect',
         card1Tag: 'STRATEGY',
@@ -213,6 +216,29 @@ const HeroAboutManager = () => {
                                     </div>
                                 </div>
 
+                                <div className="grid md:grid-cols-2 gap-6 pt-6 border-t border-white/5">
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest flex items-center gap-2">Top Pill Text</label>
+                                        <input
+                                            type="text"
+                                            value={heroData.topPillText}
+                                            onChange={(e) => setHeroData({ ...heroData, topPillText: e.target.value })}
+                                            className="w-full bg-black/40 border border-white/10 rounded-xl p-4 text-white focus:border-blue-500 outline-none text-xs font-bold"
+                                            placeholder="Visionary Architect"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest flex items-center gap-2">Company Prefix</label>
+                                        <input
+                                            type="text"
+                                            value={heroData.companyPrefix}
+                                            onChange={(e) => setHeroData({ ...heroData, companyPrefix: e.target.value })}
+                                            className="w-full bg-black/40 border border-white/10 rounded-xl p-4 text-white focus:border-blue-500 outline-none text-xs font-bold"
+                                            placeholder="Architecting at"
+                                        />
+                                    </div>
+                                </div>
+
                                 <div className="space-y-4 pt-6 border-t border-white/5">
                                     <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest flex items-center gap-2">Core Directive Description</label>
                                     <textarea
@@ -299,6 +325,27 @@ const HeroAboutManager = () => {
                                         value={aboutData.quote}
                                         onChange={(e) => setAboutData({ ...aboutData, quote: e.target.value })}
                                         className="w-full bg-black/40 border border-white/10 rounded-xl p-6 text-white focus:border-emerald-500 outline-none h-24 resize-none italic font-bold text-lg leading-relaxed shadow-inner"
+                                        required
+                                    />
+                                </div>
+
+                                <div className="space-y-4 pt-6 border-t border-white/5">
+                                    <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Main Description</label>
+                                    <textarea
+                                        value={aboutData.mainDescription}
+                                        onChange={(e) => setAboutData({ ...aboutData, mainDescription: e.target.value })}
+                                        className="w-full bg-black/40 border border-white/10 rounded-xl p-6 text-white focus:border-emerald-500 outline-none h-24 resize-none font-medium text-sm leading-relaxed shadow-inner"
+                                        required
+                                    />
+                                </div>
+                                
+                                <div className="space-y-4 pt-6 border-t border-white/5">
+                                    <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Focus Area</label>
+                                    <input
+                                        type="text"
+                                        value={aboutData.focusArea}
+                                        onChange={(e) => setAboutData({ ...aboutData, focusArea: e.target.value })}
+                                        className="w-full bg-black/40 border border-white/10 rounded-xl p-4 text-white focus:border-emerald-500 outline-none text-sm font-bold shadow-inner"
                                         required
                                     />
                                 </div>

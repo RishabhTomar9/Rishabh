@@ -1,12 +1,12 @@
 import React, { useRef } from 'react';
-import { motion, useMotionTemplate, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { FaExternalLinkAlt, FaCode, FaGithub, FaArrowRight } from 'react-icons/fa';
+import { motion, useMotionTemplate, useMotionValue, useSpring } from 'framer-motion';
+import { FaExternalLinkAlt, FaGithub, FaArrowRight, FaCode } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import Button from '../Buttons/Buttons';
 import { db } from '../../firebase';
 import { collection, query, orderBy, onSnapshot } from 'firebase/firestore';
 
-const ProjectCard = ({ project }) => {
+const ProjectRow = ({ project, index }) => {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const ref = useRef(null);
@@ -19,7 +19,7 @@ const ProjectCard = ({ project }) => {
     const xPct = (clientX - left) / width - 0.5;
     const yPct = (clientY - top) / height - 0.5;
 
-    x.set(xPct * 10); // Reduced tilt for better usability
+    x.set(xPct * 10);
     y.set(yPct * 10);
 
     mouseX.set(clientX - left);
@@ -31,102 +31,98 @@ const ProjectCard = ({ project }) => {
     y.set(0);
   }
 
+  const isEven = index % 2 === 0;
+
   return (
     <motion.div
       ref={ref}
-      className="group relative flex flex-col rounded-xl bg-zinc-900/40 border border-white/5 overflow-hidden transition-all duration-500 hover:border-purple-500/30 hover:shadow-2xl hover:shadow-purple-900/10 hover:-translate-y-1 h-full"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      style={{
-        transformStyle: "preserve-3d",
-      }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+      className={`relative w-full flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8 lg:gap-16 items-center mb-24 md:mb-40 group`}
     >
-      {/* Spotlight Effect */}
-      <motion.div
-        className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition duration-500 group-hover:opacity-100 z-10"
-        style={{
-          background: useMotionTemplate`
-            radial-gradient(
-              600px circle at ${mouseX}px ${mouseY}px,
-              rgba(168, 85, 247, 0.10),
-              transparent 80%
-            )
-          `,
-        }}
-      />
+      {/* Background Ambient Glow linking the projects */}
+      <div className={`absolute top-1/2 -translate-y-1/2 ${isEven ? 'left-1/4' : 'right-1/4'} w-1/2 h-[120%] bg-purple-900/10 blur-[120px] rounded-[100%] pointer-events-none -z-10`} />
 
-      {/* Image Container */}
-      <Link
-        to={`/projects/${project.id}`}
-        className="block relative aspect-[16/9] overflow-hidden bg-zinc-950 border-b border-white/5 cursor-pointer z-20 group/image"
-      >
-        <div className="absolute inset-0 bg-zinc-900 animate-pulse" /> {/* Placeholder loading state */}
-        <img
-          src={project.media}
-          alt={project.title}
-          className="w-full h-full object-cover opacity-80 group-hover/image:opacity-100 group-hover/image:scale-105 transition-all duration-700"
-          loading="lazy"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/80 via-transparent to-transparent opacity-60" />
+      {/* Image Side (7 columns) */}
+      <div className="w-full lg:w-7/12 relative perspective-[1000px]">
+        <Link to={`/projects/${project.id}`} className="block relative">
+          <motion.div
+            className="relative aspect-[16/10] md:aspect-[16/9] overflow-hidden rounded-[2rem] bg-zinc-900 border border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.5)] group-hover:border-purple-500/30 transition-all duration-700 z-20"
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            style={{ transformStyle: "preserve-3d" }}
+          >
+            <img
+              src={project.media}
+              alt={project.title}
+              className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000 ease-[0.16,1,0.3,1]"
+              loading="lazy"
+            />
+            
+            {/* Image Overlay Gradient */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 z-10" />
+            
+            {/* Quick Action Pill */}
+            <div className="absolute bottom-6 left-6 md:bottom-8 md:left-8 z-30 flex items-center gap-3 bg-black/50 backdrop-blur-md border border-white/10 px-4 py-2 rounded-2xl opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
+              <span className="text-[10px] font-bold text-white uppercase tracking-widest">Explore Project</span>
+              <FaArrowRight className="text-purple-400 text-xs" />
+            </div>
+          </motion.div>
+        </Link>
+      </div>
 
-        {/* Mobile/Quick Action Overlay - Subtle hint */}
-        <div className="absolute top-4 right-4 bg-purple-500/90 backdrop-blur-md border border-white/10 rounded-xl px-3 py-1 text-[10px] font-bold text-white uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-2 shadow-lg">
-          View Details <FaArrowRight />
-        </div>
-      </Link>
-
-      {/* Content */}
-      <div className="flex flex-col flex-grow p-6 md:p-8 z-20 relative">
-        <div className="flex justify-between items-start mb-4 gap-4">
-          <Link to={`/projects/${project.id}`} className="group-hover:underline decoration-purple-500/50 underline-offset-4 decoration-2">
-            <h3 className="text-2xl font-black text-white font-tech tracking-tight leading-none group-hover:text-purple-400 transition-colors duration-300">
-              {project.title}
-            </h3>
-          </Link>
-
-          {/* Action Buttons - Always visible for better UX */}
-          <div className="flex items-center gap-2 shrink-0">
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noreferrer"
-              className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-purple-500/30 flex items-center justify-center text-zinc-400 hover:text-white transition-all hover:scale-110 active:scale-95"
-              title="Live Demo"
-            >
-              <FaExternalLinkAlt className="text-sm" />
-            </a>
-            <a
-              href="https://github.com/RishabhTomar9" // Using generic logic as specific repo wasn't in DB usually
-              target="_blank"
-              rel="noreferrer"
-              className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-purple-500/30 flex items-center justify-center text-zinc-400 hover:text-white transition-all hover:scale-110 active:scale-95"
-              title="Source Code"
-            >
-              <FaGithub className="text-lg" />
-            </a>
-          </div>
+      {/* Content Side (5 columns) */}
+      <div className="w-full lg:w-5/12 flex flex-col justify-center relative z-20">
+        <div className="flex items-center gap-4 mb-6">
+          <span className="text-[10px] font-bold text-purple-400 uppercase tracking-[0.3em]">Project 0{index + 1}</span>
+          <span className="h-[1px] flex-grow bg-gradient-to-r from-purple-500/50 to-transparent" />
         </div>
 
-        <p className="text-zinc-400 text-sm mb-6 leading-relaxed font-medium line-clamp-3">
-          {project.description}
-        </p>
+        <Link to={`/projects/${project.id}`} className="group-hover:translate-x-2 transition-transform duration-500 inline-block w-fit">
+          <h3 className="text-4xl md:text-5xl lg:text-6xl font-black text-white font-tech uppercase tracking-tighter mb-6 hover:text-purple-300 transition-colors">
+            {project.title}
+          </h3>
+        </Link>
 
-        <div className="mt-auto pt-6 border-t border-white/5">
-          <div className="flex flex-wrap gap-2">
-            {project.technologies.slice(0, 5).map((tech, i) => (
-              <span key={i} className="text-[10px] font-bold px-3 py-1.5 rounded-xl bg-purple-500/5 border border-purple-500/10 text-purple-300/80 group-hover:border-purple-500/20 group-hover:bg-purple-500/10 transition-all uppercase tracking-wider">
-                {tech}
-              </span>
-            ))}
-            {project.technologies.length > 5 && (
-              <span className="text-[10px] font-bold px-3 py-1.5 rounded-xl bg-white/5 border border-white/5 text-zinc-500 uppercase tracking-wider">
-                +{project.technologies.length - 5}
-              </span>
-            )}
-          </div>
+        <div className="bg-zinc-900/40 backdrop-blur-xl border border-white/5 rounded-3xl p-6 md:p-8 mb-8 shadow-2xl relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-purple-500 to-transparent" />
+          <p className="text-zinc-300 text-sm md:text-base leading-relaxed font-medium line-clamp-4">
+            {project.description}
+          </p>
+        </div>
+
+        <div className="flex flex-wrap gap-2 mb-10">
+          {project.technologies?.map((tech, i) => (
+            <span key={i} className="text-[10px] font-bold px-4 py-2 rounded-xl bg-white/5 border border-white/5 text-zinc-400 uppercase tracking-widest hover:text-purple-300 hover:border-purple-500/30 transition-colors cursor-default">
+              {tech}
+            </span>
+          ))}
+        </div>
+
+        <div className="flex items-center gap-4">
+          <a
+            href={project.link}
+            target="_blank"
+            rel="noreferrer"
+            className="group/btn relative flex items-center gap-3 px-8 py-4 rounded-2xl bg-white text-black font-bold uppercase tracking-widest text-[10px] overflow-hidden transition-transform hover:scale-105 active:scale-95"
+          >
+            <div className="absolute inset-0 bg-purple-200 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-[0.16,1,0.3,1]" />
+            <span className="relative z-10 flex items-center gap-3">
+              Live Demo <FaExternalLinkAlt className="text-sm" />
+            </span>
+          </a>
+          
+          <a
+            href="https://github.com/RishabhTomar9"
+            target="_blank"
+            rel="noreferrer"
+            className="w-14 h-14 rounded-2xl bg-zinc-900/50 border border-white/10 hover:border-white/30 flex items-center justify-center text-zinc-400 hover:text-white transition-all hover:scale-110 active:scale-95 backdrop-blur-sm"
+            title="Source Code"
+          >
+            <FaGithub className="text-xl" />
+          </a>
         </div>
       </div>
     </motion.div>
@@ -155,76 +151,96 @@ const Projects = () => {
   }, []);
 
   return (
-    <section id="projects" className="py-24 md:py-32 relative bg-[#050505] overflow-hidden">
-      {/* Dynamic Grid Background */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+    <section id="projects" className="py-24 md:py-40 relative bg-black overflow-hidden">
+      {/* Ambient Orbs */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-[20%] left-[10%] w-[40vw] h-[40vw] rounded-full bg-purple-900/10 blur-[150px] mix-blend-screen" />
+          <div className="absolute bottom-[10%] right-[10%] w-[50vw] h-[50vw] rounded-full bg-blue-900/10 blur-[150px] mix-blend-screen" />
+      </div>
 
-      <div className="container mx-auto px-4 md:px-6 relative z-10 ">
+      {/* Dynamic Grid Background */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
+
+      <div className="w-full px-6 md:px-12 lg:px-20 relative z-10">
 
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 md:mb-24 gap-6">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-24 md:mb-40 gap-10">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="max-w-2xl"
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-3xl"
           >
-            <div className="flex items-center gap-3 mb-6">
-              <span className="w-12 h-[2px] bg-gradient-to-r from-purple-500 to-transparent" />
-              <span className="text-xs font-bold text-purple-400 tracking-[0.3em] uppercase glow-text">Showcase</span>
+            <div className="flex items-center gap-4 mb-8">
+              <span className="w-12 h-[1px] bg-gradient-to-r from-purple-500 to-transparent" />
+              <span className="text-[10px] font-bold text-purple-400 tracking-[0.4em] uppercase">Showcase</span>
             </div>
-            <h2 className="text-6xl lg:text-7xl font-black text-white font-tech uppercase">
-              Featured
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-zinc-500 via-zinc-200 to-zinc-500 bg-300% animate-gradient">Works.</span>
+            <h2 className="text-4xl md:text-6xl font-black text-white font-tech uppercase">
+              <span className="text-transparent bg-clip-text bg-[linear-gradient(110deg,#e2e8f0,45%,#64748b,55%,#e2e8f0)] bg-[length:200%_auto]">
+              Featured Works.
+              </span>
             </h2>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="text-zinc-500 font-bold text-[10px] md:text-xs uppercase tracking-widest text-left md:text-right border-l md:border-l-0 md:border-r border-white/10 pl-4 md:pl-0 md:pr-4 py-1"
+            transition={{ delay: 0.2, duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            className="hidden lg:flex flex-col items-end gap-4 text-right"
           >
-            <p>System Status: <span className="text-emerald-500">Online</span></p>
-            <p>Selection: <span className="text-white">Premium</span></p>
-            <p>Total Archives: <span className="text-white">{projects.length}</span></p>
+            <div className="inline-flex items-center gap-3 bg-white/5 backdrop-blur-md px-6 py-3 rounded-xl border border-white/10 shadow-2xl">
+              <div className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500 shadow-[0_0_10px_#10b981]"></span>
+              </div>
+              <span className="text-[11px] font-bold text-zinc-300 uppercase tracking-[0.2em]">Deploy_Status: Online</span>
+            </div>
+            <div className="text-[10px] text-zinc-500 font-bold uppercase tracking-[0.2em]">
+              Total Archives: <span className="text-white">{projects.length}</span>
+            </div>
           </motion.div>
         </div>
 
-        {/* Projects Grid */}
+        {/* Projects List - Editorial Book-like Split Layout */}
         {loading ? (
           <div className="min-h-[400px] flex justify-center items-center">
             <div className="relative">
-              <div className="w-16 h-16 border-4 border-purple-500/30 border-t-purple-500 rounded-xl animate-spin" />
-              <div className="absolute inset-0 flex items-center justify-center font-bold text-[10px] font-bold text-purple-500 animate-pulse">LOAD</div>
+              <div className="w-20 h-20 border-4 border-purple-500/20 border-t-purple-500 rounded-full animate-spin shadow-[0_0_30px_rgba(168,85,247,0.3)]" />
+              <div className="absolute inset-0 flex items-center justify-center font-bold text-[10px] text-purple-400 animate-pulse tracking-widest">SYS</div>
             </div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10">
+          <div className="flex flex-col w-full">
             {projects.map((project, index) => (
-              <ProjectCard key={project.id || index} project={project} />
+              <ProjectRow key={project.id || index} project={project} index={index} />
             ))}
           </div>
         )}
 
+        {/* Bottom CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-24 md:mt-32 text-center"
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-32 flex justify-center"
         >
-          <Button
+          <a
             href="https://github.com/RishabhTomar9"
-            variant="ghost"
-            className="group !px-8 !py-4 md:!px-12 md:!py-6 uppercase tracking-[0.2em] text-[10px] md:text-xs border border-white/10 bg-zinc-900/50 hover:bg-zinc-900 hover:border-purple-500/50 transition-all rounded-xl backdrop-blur-md"
+            target="_blank"
+            rel="noreferrer"
+            className="group relative flex items-center justify-center gap-4 px-12 py-6 rounded-3xl bg-zinc-900/50 border border-white/10 hover:border-purple-500/50 hover:bg-zinc-900 transition-all duration-500 backdrop-blur-xl shadow-2xl"
           >
-            Access Full Archive <span className="group-hover:translate-x-1 transition-transform inline-block ml-2">→</span>
-          </Button>
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl blur-xl" />
+            <span className="relative z-10 text-[11px] font-bold text-white uppercase tracking-[0.3em]">Access Full Archive</span>
+            <FaArrowRight className="relative z-10 text-purple-400 group-hover:translate-x-2 transition-transform duration-300" />
+          </a>
         </motion.div>
       </div>
     </section>
   );
 };
-
 
 export default Projects;

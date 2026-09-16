@@ -9,8 +9,8 @@ const ScrollReveal = ({ children, width = "100%", className = "" }) => {
         <div ref={ref} style={{ width }} className={className}>
             <motion.div
                 variants={{
-                    hidden: { opacity: 0, y: 50, scale: 0.99, filter: 'blur(10px)' },
-                    visible: { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' },
+                    hidden: { opacity: 0, y: 50, scale: 0.99 },
+                    visible: { opacity: 1, y: 0, scale: 1 },
                 }}
                 initial="hidden"
                 animate={isInView ? "visible" : "hidden"}
