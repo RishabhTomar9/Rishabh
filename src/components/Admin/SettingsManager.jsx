@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../../firebase';
 import { doc, onSnapshot, setDoc } from 'firebase/firestore';
-import { FaGlobe, FaLinkedin, FaGithub, FaTwitter, FaInstagram, FaEnvelope, FaMapMarkerAlt, FaSave, FaTools, FaShareAlt, FaFileUpload, FaTrash, FaFilePdf, FaSpinner } from 'react-icons/fa';
+import { FaGlobe, FaLinkedin, FaGithub, FaTwitter, FaInstagram, FaEnvelope, FaMapMarkerAlt, FaSave, FaTools, FaShareAlt, FaFileUpload, FaTrash, FaFilePdf, FaSpinner, FaWhatsapp } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const SettingsManager = () => {
@@ -12,6 +12,7 @@ const SettingsManager = () => {
         linkedin: 'https://www.linkedin.com/in/rishabhtomar9/',
         twitter: '',
         instagram: '',
+        whatsapp: '',
         location: 'India',
         footerCredit: 'Designed & Built by Rishabh Tomar',
         contactHeading: 'Get In Touch',
@@ -172,6 +173,16 @@ const SettingsManager = () => {
                                     onChange={(e) => setSettings({ ...settings, instagram: e.target.value })}
                                     className="w-full bg-black/40 border border-white/10 rounded-xl p-3 text-white focus:border-orange-500 outline-none text-sm"
                                     placeholder="https://instagram.com/..."
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest flex items-center gap-2"><FaWhatsapp /> WhatsApp URL</label>
+                                <input
+                                    type="text"
+                                    value={settings.whatsapp}
+                                    onChange={(e) => setSettings({ ...settings, whatsapp: e.target.value })}
+                                    className="w-full bg-black/40 border border-white/10 rounded-xl p-3 text-white focus:border-orange-500 outline-none text-sm"
+                                    placeholder="https://wa.me/..."
                                 />
                             </div>
                         </div>
